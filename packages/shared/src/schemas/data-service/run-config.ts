@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { capitalize } from 'lodash'
+import { capitalize } from 'lodash-es'
 
 import i18n from '@dhis2/d2-i18n'
 import { dataServiceRuntimeConfig } from './config'

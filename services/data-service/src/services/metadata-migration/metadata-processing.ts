@@ -1,5 +1,5 @@
 import { MetadataDownloadType, MetadataRun } from '@/generated/prisma/client'
-import { chunk, isEmpty } from 'lodash'
+import { chunk, isEmpty } from 'lodash-es'
 import { dbClient } from '@/clients/prisma'
 import logger from '@/logging'
 import { pushToQueue } from '@/rabbit/publisher'

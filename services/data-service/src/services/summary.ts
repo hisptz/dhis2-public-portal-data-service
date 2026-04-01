@@ -2,7 +2,7 @@ import {
     DataDownloadSummary,
     DataUploadSummary,
     ProcessSummary,
-} from '@packages/shared/schemas'
+} from 'shared/schemas'
 import logger from '../logging'
 
 const summaryPath = `summaries`

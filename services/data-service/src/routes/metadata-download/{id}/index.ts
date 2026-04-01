@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import logger from '@/logging'
 import { Operation } from 'express-openapi'
-import { metadataMigrationSchema } from '@packages/shared/schemas'
+import { metadataMigrationSchema } from 'shared/schemas'
 import { dbClient } from '@/clients/prisma'
 import { MetadataSourceType } from '@/generated/prisma/enums'
 import { pushToQueue } from '@/rabbit/publisher'

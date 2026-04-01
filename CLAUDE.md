@@ -13,11 +13,17 @@ This is a **pnpm monorepo** for transferring DHIS2 metadata and data to a FlexiP
 ## Commands
 
 ### Root
+
 ```bash
 pnpm clean        # Remove all node_modules recursively
+pnpm lint         # ESLint across the monorepo (excludes apps/manager, has own config)
+pnpm format       # Prettier write across all files
+pnpm format:check # Prettier check across all files
+pnpm typecheck    # tsc --noEmit in all workspaces
 ```
 
 ### Manager App (`apps/manager`)
+
 ```bash
 pnpm start        # Dev server (d2-app-scripts start)
 pnpm build        # Production build
@@ -27,6 +33,7 @@ pnpm format       # Prettier write
 ```
 
 ### Data Service (`services/data-service`)
+
 ```bash
 pnpm dev          # Run API + worker concurrently (hot reload)
 pnpm dev:api      # API server only (Bun watch)
@@ -46,6 +53,7 @@ pnpm prisma:reset     # Reset DB + re-run migrations
 ### Environment Setup
 
 Copy `services/data-service/.env.example` to `.env` and fill in:
+
 - `DHIS2_BASE_URL`, `DHIS2_PAT` — source DHIS2 instance
 - `RABBITMQ_URI` (or `RABBITMQ_HOST/USER/PASS`) — message queue
 - `DATABASE_URL` — PostgreSQL connection

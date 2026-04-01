@@ -47,10 +47,14 @@ async function consumeFailedMessagesFromRabbitMQ(
     } catch (error) {
         if (error instanceof Error) {
             logger.error(`Error consuming failed messages:`, error)
-            throw new Error(`Failed to consume messages: ${error.message}`)
+            throw new Error(`Failed to consume messages: ${error.message}`, {
+                cause: error,
+            })
         } else {
             logger.error(`Error consuming failed messages:`, error)
-            throw new Error(`Failed to consume messages: ${error}`)
+            throw new Error(`Failed to consume messages: ${error}`, {
+                cause: error,
+            })
         }
     }
 }

@@ -1,0 +1,54 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    typecheck:
+        name: Type Check
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - name: Run type checking
+              run: pnpm -r run --if-present typecheck
+
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - name: Run ESLint
+              run: pnpm -r run --if-present lint:check
+
+    format:
+        name: Format Check
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - name: Check formatting
+              run: pnpm exec prettier --check .

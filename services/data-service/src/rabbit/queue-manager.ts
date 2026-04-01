@@ -1,8 +1,8 @@
 import logger from '@/logging'
 import { getChannel } from './connection'
-import { DatastoreNamespaces } from '@packages/shared/constants'
+import { DatastoreNamespaces } from 'shared/constants'
 import { dhis2Client } from '@/clients/dhis2'
-import { DataServiceConfig } from '@packages/shared/schemas'
+import { DataServiceConfig } from 'shared/schemas'
 import { getQueueNames } from '@/variables/queue-names'
 import { REFRESH_EXCHANGE } from '@/rabbit/constants'
 

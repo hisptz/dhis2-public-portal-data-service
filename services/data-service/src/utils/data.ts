@@ -4,10 +4,10 @@ import {
     DataServiceAttributeValuesDataItemsSource,
     DataServiceDataItemConfig,
     DataServiceDataSourceItemsConfig,
-} from '@packages/shared/schemas'
+} from 'shared/schemas'
 import { v4 } from 'uuid'
 import { Dimensions } from '@/schemas/metadata'
-import { isEmpty, isEqual, uniqWith } from 'lodash'
+import { isEmpty, isEqual, uniqWith } from 'lodash-es'
 import { categoriesMeta } from '@/variables/meta'
 import * as fs from 'node:fs'
 import * as path from 'node:path'

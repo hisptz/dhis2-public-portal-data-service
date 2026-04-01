@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { capitalize, flattenDeep, isEmpty, truncate } from 'lodash'
+import { capitalize, flattenDeep, isEmpty, truncate } from 'lodash-es'
 import { uid } from '@hisptz/dhis2-utils'
 import { DataElement } from '@/utils/visualizations'
 import { logWorker } from '@/rabbit/utils'

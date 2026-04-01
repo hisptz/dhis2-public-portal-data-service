@@ -1,5 +1,5 @@
 import { dbClient } from '@/clients/prisma'
-import { compact } from 'lodash'
+import { compact } from 'lodash-es'
 
 export async function getRunStatus({
     runId,

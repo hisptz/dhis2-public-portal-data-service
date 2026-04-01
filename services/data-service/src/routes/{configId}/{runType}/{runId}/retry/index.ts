@@ -3,7 +3,7 @@ import { Operation } from 'express-openapi'
 import { dbClient } from '@/clients/prisma'
 import { NullableJsonNullValueInput } from '@/generated/prisma/internal/prismaNamespace'
 import { Queues } from '@/rabbit/constants'
-import { isEmpty, fromPairs } from 'lodash'
+import { fromPairs, isEmpty } from 'lodash-es'
 import logger from '@/logging'
 import { pushToQueue } from '@/rabbit/publisher'
 

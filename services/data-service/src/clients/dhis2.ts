@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from 'axios'
 import { config } from 'dotenv'
 import { env } from '@/env'
-import { DataServiceConfig } from '@packages/shared/schemas'
-import { DatastoreNamespaces } from '@packages/shared/constants'
+import { DataServiceConfig } from 'shared/schemas'
+import { DatastoreNamespaces } from 'shared/constants'
 
 config()
 
@@ -38,7 +38,8 @@ export async function getSourceClientFromConfig(
         return createSourceClient(config.source.routeId)
     } catch (error) {
         throw new Error(
-            `Failed to get source client for config ${configId}: ${error instanceof Error ? error.message : 'Unknown error'}`
+            `Failed to get source client for config ${configId}: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            { cause: error }
         )
     }
 }

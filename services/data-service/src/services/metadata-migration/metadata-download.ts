@@ -20,7 +20,7 @@ import {
     sanitizeVisualizationsWithDatasetReferences,
     Visualization,
 } from '@/utils/visualizations'
-import { compact, isEmpty, uniq, uniqBy } from 'lodash'
+import { compact, isEmpty, uniq, uniqBy } from 'lodash-es'
 import {
     getCategories,
     getIndicatorsConfig,

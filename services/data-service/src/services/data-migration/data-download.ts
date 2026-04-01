@@ -9,9 +9,9 @@ import {
     DataServiceConfig,
     DataServiceDataSourceItemsConfig,
     DataServiceRuntimeConfig,
-} from '@packages/shared/schemas'
+} from 'shared/schemas'
 import { AxiosInstance } from 'axios'
-import { chunk, compact, head, isEmpty } from 'lodash'
+import { chunk, compact, head, isEmpty } from 'lodash-es'
 import { pushToQueue } from '@/rabbit/publisher'
 import {
     createMapping,

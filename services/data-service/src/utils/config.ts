@@ -1,8 +1,8 @@
 import { dhis2Client } from '@/clients/dhis2'
 import logger from '@/logging'
 import { ProcessName } from '@/rabbit/constants'
-import { DatastoreNamespaces } from '@packages/shared/constants'
-import { DataServiceConfig } from '@packages/shared/schemas'
+import { DatastoreNamespaces } from 'shared/constants'
+import { DataServiceConfig } from 'shared/schemas'
 import { AxiosError } from 'axios'
 
 export async function getMainConfig(mainConfigId: string) {

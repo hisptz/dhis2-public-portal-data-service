@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios'
 import { DataElement } from '@/utils/visualizations'
-import { isEmpty } from 'lodash'
+import { isEmpty } from 'lodash-es'
 import { logWorker } from '@/rabbit/utils'
 
 type ProgramIndicator = {

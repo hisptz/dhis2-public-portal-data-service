@@ -8,7 +8,7 @@ import { DateTime, Interval } from 'luxon'
 import {
     DataServiceDataSourceItemsConfig,
     DataServiceRuntimeConfig,
-} from '@packages/shared/schemas'
+} from 'shared/schemas'
 import { Dimensions } from '@/schemas/metadata'
 import logger from '@/logging'
 

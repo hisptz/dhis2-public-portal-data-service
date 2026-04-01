@@ -1,7 +1,7 @@
 import { DataDownloadUpdateInput } from '@/generated/prisma/models/DataDownload'
 import { DataUploadUpdateInput } from '@/generated/prisma/models/DataUpload'
 import { Dimensions } from '@/schemas/metadata'
-import { DataServiceDataSourceItemsConfig } from '@packages/shared/schemas'
+import { DataServiceDataSourceItemsConfig } from 'shared/schemas'
 import { dbClient } from '@/clients/prisma'
 import { UploadStrategy } from '@/generated/prisma/enums'
 

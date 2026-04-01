@@ -3,7 +3,7 @@ import {
     QueueDetails,
     QueueStatusResult,
     SystemHealth,
-} from '@packages/shared/schemas'
+} from 'shared/schemas'
 import logger from '@/logging'
 import { getQueueNames } from '@/variables/queue-names'
 import { rabbitmqClient } from '@/clients/rabbitmq'

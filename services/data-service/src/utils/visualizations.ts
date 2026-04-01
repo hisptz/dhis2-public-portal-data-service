@@ -1,6 +1,6 @@
 import logger from '@/logging'
-import * as _ from 'lodash'
-import { compact, flattenDeep, isEmpty } from 'lodash'
+import * as _ from 'lodash-es'
+import { compact, flattenDeep, isEmpty } from 'lodash-es'
 import { AxiosInstance } from 'axios'
 import { logWorker } from '@/rabbit/utils'
 

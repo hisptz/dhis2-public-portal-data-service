@@ -1,4 +1,4 @@
-import { chunk, compact, isEmpty, uniq } from 'lodash'
+import { chunk, compact, isEmpty, uniq } from 'lodash-es'
 import { mapSeries } from 'async'
 import { createSourceClient, dhis2Client } from '@/clients/dhis2'
 import logger from '@/logging'

@@ -1,6 +1,6 @@
-import { DataServiceConfig } from '@packages/shared/schemas'
+import { DataServiceConfig } from 'shared/schemas'
 import logger from '@/logging'
-import { DatastoreNamespaces } from '@packages/shared/constants'
+import { DatastoreNamespaces } from 'shared/constants'
 import { dhis2Client } from '@/clients/dhis2'
 import { AxiosError } from 'axios'
 

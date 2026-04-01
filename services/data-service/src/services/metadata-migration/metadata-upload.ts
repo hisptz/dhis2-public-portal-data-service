@@ -10,8 +10,8 @@ import { existsSync } from 'node:fs'
 import { AxiosInstance } from 'axios'
 import { dhis2Client } from '@/clients/dhis2'
 import { logWorker } from '@/rabbit/utils'
-import { DatastoreNamespaces } from '@packages/shared/constants'
-import { DataServiceConfig } from '@packages/shared/schemas'
+import { DatastoreNamespaces } from 'shared/constants'
+import { DataServiceConfig } from 'shared/schemas'
 
 export async function uploadMetadata({
     metadata,
