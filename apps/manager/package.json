@@ -16,6 +16,7 @@
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {
+        "@dhis2/app-adapter": "^12.11.0",
         "@dhis2/app-runtime": "^3.16.0",
         "@dhis2/d2-i18n": "^1.2.0",
         "@dhis2/ui": "^10.12.12",
