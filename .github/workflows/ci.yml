@@ -21,7 +21,7 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
             - name: Generate prisma
-              run: pnpm -r run --if-present prisma:generate
+              run: pnpm -r run --filter data-service prisma:generate -- --config data-service/prisma.config.ts
             - name: Run type checking
               run: pnpm -r run --if-present typecheck
 
