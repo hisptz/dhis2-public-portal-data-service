@@ -5,7 +5,7 @@ const config = {
     entryPoints: {
         app: './src/App.tsx',
     },
-    author: "HISP Tanzania<dev@hisptanzania.org>",
+    author: 'HISP Tanzania<dev@hisptanzania.org>',
     viteConfigExtensions: './viteConfigExtensions.mts',
 }
 

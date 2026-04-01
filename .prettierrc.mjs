@@ -6,7 +6,7 @@ import prettierConfig from '@dhis2/config-prettier'
 const config = {
     ...prettierConfig,
     tabWidth: 4,
-    singleQuote: true
+    singleQuote: true,
 }
 
 export default config

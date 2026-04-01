@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a **pnpm monorepo** for transferring DHIS2 metadata and data to a FlexiPortal platform. It contains:
+This is a **pnpm monorepo** for transferring DHIS2 metadata and data to a FlexiPortal DHIS2 platform. It contains:
 
 - `apps/manager` — DHIS2 web app (React + DHIS2 App Platform) for managing sync configurations
 - `packages/shared` — Shared Zod schemas/types used across apps and services
