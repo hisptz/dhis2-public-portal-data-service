@@ -22,6 +22,8 @@ jobs:
               run: pnpm install --frozen-lockfile
             - name: Generate prisma
               run: pnpm -r run --filter data-service prisma:generate -- --config data-service/prisma.config.ts
+              env:
+                  DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/postgres?schema=public' # Placeholder for prisma generate
             - name: Run type checking
               run: pnpm -r run --if-present typecheck
 
