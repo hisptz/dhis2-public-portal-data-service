@@ -1,0 +1,35 @@
+{
+  "name": "manager",
+  "version": "1.0.0",
+  "description": "",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "build": "d2-app-scripts build",
+    "start": "d2-app-scripts start",
+    "test": "d2-app-scripts test",
+    "deploy": "d2-app-scripts deploy",
+    "lint": "eslint && prettier -c .",
+    "format": "prettier . -w"
+  },
+  "dependencies": {
+    "@dhis2/app-runtime": "^3.16.0",
+    "@dhis2/ui": "^10.12.12",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@dhis2/cli-app-scripts": "^12.11.0",
+    "@dhis2/config-eslint": "^0.2.2",
+    "@dhis2/config-prettier": "^0.2.2",
+    "@eslint/compat": "^2.0.0",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.1.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.3"
+  }
+}
