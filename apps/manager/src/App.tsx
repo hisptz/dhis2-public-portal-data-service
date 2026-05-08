@@ -6,6 +6,7 @@ import {
 import { routeTree } from './routeTree.gen'
 import { DialogProvider } from '@hisptz/dhis2-ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import './main.css'
 
 const hashHistory = createHashHistory()
 
