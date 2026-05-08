@@ -3,7 +3,7 @@ import {
     generateFixedPeriods,
     periodTypes,
 } from '@dhis2/multi-calendar-dates'
-import 'react' //For the multi-calendar-dates package
+// import 'react' //For the multi-calendar-dates package
 import { DateTime, Interval } from 'luxon'
 import {
     DataServiceDataSourceItemsConfig,

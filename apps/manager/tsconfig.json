@@ -3,15 +3,23 @@
         "noEmit": true,
         "skipLibCheck": true,
         "allowJs": true,
-        "jsx": "react",
+        "jsx": "react-jsx",
         "esModuleInterop": true,
         "target": "ESNext",
         "module": "esnext",
-        "moduleResolution": "node",
-        "baseUrl": ".",
+        "moduleResolution": "bundler",
+        "strictNullChecks": true,
+        "types": ["cypress", "node"],
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["./src/*"]
         }
     },
-    "include": ["src", "types"]
+    "include": [
+        "src",
+        "types",
+        "tailwind.config.ts",
+        "cypress",
+        "cypress.config.ts",
+        "viteConfigExtensions.mts"
+    ]
 }

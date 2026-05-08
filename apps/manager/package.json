@@ -7,7 +7,7 @@
     "packageManager": "pnpm@10.13.1",
     "scripts": {
         "build": "d2-app-scripts build",
-        "start": "d2-app-scripts start",
+        "dev": "dotenv -- cross-var d2-app-scripts start --proxy %DHIS2_PROXY_URL% --port 3000",
         "test": "d2-app-scripts test",
         "deploy": "d2-app-scripts deploy",
         "lint": "eslint && prettier -c .",
@@ -19,10 +19,26 @@
         "@dhis2/app-adapter": "^12.11.0",
         "@dhis2/app-runtime": "^3.16.0",
         "@dhis2/d2-i18n": "^1.2.0",
-        "@dhis2/ui": "^10.12.12",
+        "@dhis2/ui": "10.9.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "shared": "workspace:*"
+        "shared": "workspace:*",
+        "@tanstack/react-query": "^5.90.21",
+        "@tanstack/react-router": "^1.149.3",
+        "@hisptz/dhis2-ui": "^2.0.51",
+        "@hisptz/dhis2-utils": "^2.0.19",
+        "xlsx": "^0.18.5",
+        "zod": "^4.3.6",
+        "react-hook-form": "^7.57.0",
+        "@hookform/resolvers": "^5.2.2",
+        "@types/lodash": "^4.17.16",
+        "lodash": "^4.17.23",
+        "usehooks-ts": "^3.1.1",
+        "luxon": "^3.7.2",
+        "classnames": "^2.5.1",
+        "framer-motion": "^12.34.0",
+        "exceljs": "^4.4.0",
+        "react-error-boundary": "^6.0.0"
     },
     "devDependencies": {
         "@dhis2/cli-app-scripts": "^12.11.0",
@@ -32,8 +48,17 @@
         "@types/jest": "^30.0.0",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
+        "@tanstack/router-cli": "^1.149.3",
+        "@tanstack/router-devtools": "^1.149.3",
+        "@tanstack/router-plugin": "^1.149.3",
         "eslint": "^10.1.0",
+        "cross-var": "^1.1.0",
+        "dotenv": "^16.5.0",
+        "dotenv-cli": "^8.0.0",
         "typescript": "^5.9.3",
-        "vite": "^8.0.3"
+        "vite": "^8.0.3",
+        "tailwind": "4",
+        "tailwindcss": "4",
+        "@tailwindcss/vite": "^4.1.13"
     }
 }
