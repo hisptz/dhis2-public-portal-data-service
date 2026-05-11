@@ -1,0 +1,37 @@
+import { RunConfigSummaryModal } from './components/RunConfigSummaryModal'
+import { useBoolean } from 'usehooks-ts'
+import { Button, IconTerminalWindow16, Tooltip } from '@dhis2/ui'
+import i18n from '@dhis2/d2-i18n'
+
+export function RunConfigSummary({
+    runId,
+    type,
+    configId,
+}: {
+    runId: string
+    type: 'metadata' | 'data'
+    configId: string
+}) {
+    const { value: hide, setTrue: onHide, setFalse: onShow } = useBoolean(true)
+
+    return (
+        <>
+            {!hide && (
+                <RunConfigSummaryModal
+                    hide={hide}
+                    onClose={onHide}
+                    runId={runId}
+                    type={type}
+                    configId={configId}
+                />
+            )}
+            <Tooltip content={i18n.t('View last run summary')}>
+                <Button
+                    small
+                    onClick={onShow}
+                    icon={<IconTerminalWindow16 />}
+                />
+            </Tooltip>
+        </>
+    )
+}

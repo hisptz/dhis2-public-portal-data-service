@@ -10,4 +10,12 @@ export default defineConfig([
     {
         extends: [config],
     },
+    {
+        rules: {
+            // eslint-plugin-import v2 has false positives and crashes on ESLint v10
+            'import/order': 'off',
+            'import/named': 'off',
+            'max-params': 'off',
+        },
+    },
 ])

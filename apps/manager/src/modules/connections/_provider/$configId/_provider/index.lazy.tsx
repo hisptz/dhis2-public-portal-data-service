@@ -1,0 +1,138 @@
+import {
+    createLazyFileRoute,
+    useNavigate,
+    useParams,
+} from '@tanstack/react-router'
+import {
+    Button,
+    ButtonStrip,
+    IconArrowLeft24,
+    IconSettings24,
+    SegmentedControl,
+    Tooltip,
+} from '@dhis2/ui'
+import i18n from '@dhis2/d2-i18n'
+import { FormTestConnection } from '@/shared/components/DataConfiguration/components/FormTestConnection'
+import { RunConfiguration } from '@/shared/components/DataConfiguration/components/RunConfiguration/RunConfiguration'
+import { useFormContext } from 'react-hook-form'
+import { RunList } from '@/shared/components/DataConfiguration/components/RunList/RunList'
+import { useConfigurationRuns } from '@/shared/components/DataConfiguration/components/RunList/hooks/data'
+import { useState } from 'react'
+import { DataServiceConfig } from '@/shared/schemas/data-service'
+import { PageHeader } from '@/shared/components/PageHeader'
+
+export const Route = createLazyFileRoute(
+    '/connections/_provider/$configId/_provider/'
+)({
+    component: RouteComponent,
+})
+
+function RouteComponent() {
+    const navigate = useNavigate({
+        from: '/connections/$configId',
+    })
+
+    const { configId } = useParams({
+        from: '/connections/_provider/$configId/_provider/',
+    })
+
+    const config = useFormContext<DataServiceConfig>().watch()
+    const source = config?.source
+    const [activeTab, setActiveTab] = useState<'metadata' | 'data'>('metadata')
+
+    const { loading, runs, fetching, pagination, error, refetch } =
+        useConfigurationRuns(activeTab, configId)
+
+    return (
+        <div className="h-full w-full flex flex-col gap-4 ">
+            <div className="pb-2">
+                <Button
+                    onClick={() => {
+                        navigate({
+                            to: '/connections',
+                        })
+                    }}
+                    icon={<IconArrowLeft24 />}
+                >
+                    {i18n.t('Back')}
+                </Button>
+            </div>
+            {!config || !config.id || !source ? (
+                <></>
+            ) : (
+                <>
+                    <PageHeader
+                        actions={
+                            <ButtonStrip>
+                                <Tooltip content={i18n.t('Edit configuration')}>
+                                    <Button
+                                        onClick={() => {
+                                            navigate({
+                                                to: '/connections/$configId/edit',
+                                                params: {
+                                                    configId: config.id!,
+                                                },
+                                            })
+                                        }}
+                                        icon={<IconSettings24 />}
+                                    >
+                                        {i18n.t('Configure')}
+                                    </Button>
+                                </Tooltip>
+                                <RunConfiguration
+                                    label={i18n.t('Run')}
+                                    config={
+                                        config as Required<DataServiceConfig>
+                                    }
+                                    onRunComplete={() => {
+                                        refetch()
+                                    }}
+                                />
+                            </ButtonStrip>
+                        }
+                        title={config?.source?.name ?? ''}
+                        subTitle={
+                            <FormTestConnection
+                                routeConfig={{
+                                    name: source?.name ?? '',
+                                    id: source?.routeId ?? '',
+                                    url: '',
+                                }}
+                            />
+                        }
+                    />
+                    <>
+                        <div className="flex flex-row justify-start items-center">
+                            <SegmentedControl
+                                selected={activeTab}
+                                onChange={({ value }) =>
+                                    setActiveTab(value as 'metadata' | 'data')
+                                }
+                                options={[
+                                    {
+                                        label: i18n.t('Metadata Runs'),
+                                        value: 'metadata',
+                                    },
+                                    {
+                                        label: i18n.t('Data Runs'),
+                                        value: 'data',
+                                    },
+                                ]}
+                            />
+                        </div>
+                        <RunList
+                            loading={loading}
+                            runs={runs}
+                            activeTab={activeTab}
+                            fetching={fetching}
+                            pagination={pagination}
+                            error={error}
+                            refetch={refetch}
+                            config={config as DataServiceConfig}
+                        />
+                    </>
+                </>
+            )}
+        </div>
+    )
+}
