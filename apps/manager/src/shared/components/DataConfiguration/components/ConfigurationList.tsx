@@ -8,7 +8,7 @@ import {
     Button,
     ButtonStrip,
     IconDelete16,
-    IconView16,
+    IconSettings16,
     Tooltip,
 } from '@dhis2/ui'
 import { useNavigate } from '@tanstack/react-router'
@@ -22,7 +22,7 @@ const columns: SimpleTableColumn[] = [
         key: 'name',
     },
     {
-        label: i18n.t('URL'),
+        label: i18n.t('Source URL'),
         key: 'url',
     },
     {
@@ -38,20 +38,16 @@ const columns: SimpleTableColumn[] = [
 export function ConfigurationList() {
     const configurations = useDataSources()
     const { routes, refetch: refetchRoutes } = useRoutes()
-    const navigate = useNavigate({
-        from: '/data-service-configuration/',
-    })
+    const navigate = useNavigate({ from: '/connections/' })
     const { confirm } = useDialog()
     const { deleteConfig } = useDeleteDataSource()
 
     const handleDelete = (config: DataServiceConfig) => {
         confirm({
-            title: i18n.t('Confirm delete'),
+            title: i18n.t('Delete connection'),
             message: (
                 <span>
-                    {i18n.t(
-                        'Are you sure you want to delete the configuration '
-                    )}
+                    {i18n.t('Are you sure you want to delete')}{' '}
                     <b>{config.source.name}</b>?{' '}
                     {i18n.t('This action cannot be undone.')}
                 </span>
@@ -80,22 +76,20 @@ export function ConfigurationList() {
             status: <ConfigStatus configId={configuration.id} />,
             actions: (
                 <ButtonStrip>
-                    <Tooltip content={i18n.t('View runs')}>
+                    <Tooltip content={i18n.t('Configure')}>
                         <Button
                             small
                             secondary
-                            onClick={() => {
+                            onClick={() =>
                                 navigate({
-                                    to: '/data-service-configuration/$configId',
-                                    params: {
-                                        configId: configuration.id,
-                                    },
+                                    to: '/connections/$configId/edit',
+                                    params: { configId: configuration.id },
                                 })
-                            }}
-                            icon={<IconView16 />}
+                            }
+                            icon={<IconSettings16 />}
                         />
                     </Tooltip>
-                    <Tooltip content={i18n.t('Delete configuration')}>
+                    <Tooltip content={i18n.t('Delete connection')}>
                         <Button
                             small
                             secondary
@@ -109,13 +103,20 @@ export function ConfigurationList() {
     })
 
     return (
-        <div className="flex flex-col gap-8">
-            <div className="flex justify-end">
+        <div className="flex flex-col gap-6">
+            <div className="flex items-start justify-between gap-4">
+                <p className="text-sm text-gray-500 max-w-[70vw]">
+                    {i18n.t(
+                        'Manage DHIS2 source connections. Each connection is used across all migration and validation services.'
+                    )}
+                </p>
                 <AddDataSource />
             </div>
             <SimpleDataTable
                 rows={rows}
-                emptyLabel="There are no configuration present"
+                emptyLabel={i18n.t(
+                    'No connections configured yet. Add a connection to get started.'
+                )}
                 columns={columns}
             />
         </div>

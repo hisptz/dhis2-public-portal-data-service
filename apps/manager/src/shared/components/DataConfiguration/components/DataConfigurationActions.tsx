@@ -1,18 +1,14 @@
 import { Button, ButtonStrip } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
 import { SubmitErrorHandler, useFormContext } from 'react-hook-form'
-import { useNavigate, useParams } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { useAlert } from '@dhis2/app-runtime'
 import { useUpdateDataSource } from '../hooks/save'
 import { DataServiceConfig } from '@/shared/schemas/data-service'
 
 export function DataConfigurationActions() {
     const navigate = useNavigate({
-        from: '/data-service-configuration/$configId/edit/',
-    })
-
-    const { configId } = useParams({
-        from: '/data-service-configuration/_provider/$configId/_provider/edit/_provider/',
+        from: '/connections/$configId/edit/',
     })
 
     const { handleSubmit, formState } = useFormContext<DataServiceConfig>()
@@ -33,16 +29,7 @@ export function DataConfigurationActions() {
 
     return (
         <ButtonStrip end>
-            <Button
-                onClick={() => {
-                    navigate({
-                        to: `/data-service-configuration/$configId`,
-                        params: {
-                            configId,
-                        },
-                    })
-                }}
-            >
+            <Button onClick={() => navigate({ to: '/connections' })}>
                 {i18n.t('Cancel')}
             </Button>
             <Button

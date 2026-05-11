@@ -32,7 +32,7 @@ export function useCreateDataSource(onClose?: () => void) {
         ({ type }) => ({ ...type, duration: 3000 })
     )
     const navigate = useNavigate({
-        from: '/data-service-configuration/',
+        from: '/connections/',
     })
     const [createRoute] = useDataMutation(createRouteMutation)
     const engine = useDataEngine()
@@ -85,7 +85,7 @@ export function useCreateDataSource(onClose?: () => void) {
                 onClose()
             } else {
                 navigate({
-                    to: '/data-service-configuration',
+                    to: '/connections',
                 })
             }
         } catch (error) {
@@ -118,10 +118,10 @@ const updateDataSourceMutation = {
 
 export function useUpdateDataSource() {
     const navigate = useNavigate({
-        from: '/data-service-configuration/$configId/edit/',
+        from: '/connections/$configId/edit/',
     })
     const { configId } = useParams({
-        from: '/data-service-configuration/_provider/$configId/_provider/edit/_provider/',
+        from: '/connections/_provider/$configId/_provider/edit/_provider/',
     })
     const refreshList = useRefreshDataSources()
     const { show } = useAlert(
@@ -188,12 +188,7 @@ export function useUpdateDataSource() {
         }
 
         refreshList()
-        await navigate({
-            to: '/data-service-configuration/$configId',
-            params: {
-                configId,
-            },
-        })
+        await navigate({ to: '/connections' })
     }
 
     return {
@@ -209,7 +204,7 @@ export function useUpdateConnection() {
     )
     const engine = useDataEngine()
     const { configId } = useParams({
-        from: '/data-service-configuration/_provider/$configId/_provider/edit/_provider/',
+        from: '/connections/_provider/$configId/_provider/edit/_provider/',
     })
 
     const updateConnection = async (

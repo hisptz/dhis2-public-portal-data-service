@@ -10,14 +10,14 @@ import {
 } from '@/shared/schemas/data-service'
 
 export const Route = createFileRoute(
-    '/data-service-configuration/_provider/$configId/_provider/edit/_provider'
+    '/connections/_provider/$configId/_provider/edit/_provider'
 )({
     component: RouteComponent,
 })
 
 function RouteComponent() {
     const { configId } = useParams({
-        from: '/data-service-configuration/_provider/$configId/_provider/edit/_provider/',
+        from: '/connections/_provider/$configId/_provider/edit/_provider/',
     })
     const { refetch } = useGetDataSource(configId)
     const form = useForm<DataServiceConfig>({

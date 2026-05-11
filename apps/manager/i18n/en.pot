@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-07T12:39:12.053Z\n"
-"PO-Revision-Date: 2026-05-07T12:39:12.053Z\n"
+"POT-Creation-Date: 2026-05-11T11:59:03.075Z\n"
+"PO-Revision-Date: 2026-05-11T11:59:03.075Z\n"
 
 msgid "Back"
 msgstr "Back"
@@ -26,11 +26,78 @@ msgstr "Metadata Runs"
 msgid "Data Runs"
 msgstr "Data Runs"
 
-msgid "Data service configuration"
-msgstr "Data service configuration"
+msgid "Connections"
+msgstr "Connections"
 
-msgid "Add data configuration"
-msgstr "Add data configuration"
+msgid "Delete Data"
+msgstr "Delete Data"
+
+msgid "Data Deletion"
+msgstr "Data Deletion"
+
+msgid ""
+"Permanently delete data values from the portal for selected configurations "
+"and periods. This action is irreversible, use with care. Choose a "
+"connection to review past deletions or trigger a new one."
+msgstr ""
+"Permanently delete data values from the portal for selected configurations "
+"and periods. This action is irreversible, use with care. Choose a "
+"connection to review past deletions or trigger a new one."
+
+msgid "Run Migration"
+msgstr "Run Migration"
+
+msgid "Data Migration"
+msgstr "Data Migration"
+
+msgid ""
+"Migrate data values from a source DHIS2 instance to the portal for selected "
+"configurations and periods. Choose a connection to view past runs or start "
+"a new migration."
+msgstr ""
+"Migrate data values from a source DHIS2 instance to the portal for selected "
+"configurations and periods. Choose a connection to view past runs or start "
+"a new migration."
+
+msgid "Run Validation"
+msgstr "Run Validation"
+
+msgid "Validation history is not yet supported"
+msgstr "Validation history is not yet supported"
+
+msgid ""
+"Use the \"Run Validation\" button to start a new data validation. Results "
+"will open in the validation logs view."
+msgstr ""
+"Use the \"Run Validation\" button to start a new data validation. Results "
+"will open in the validation logs view."
+
+msgid "Data Validation"
+msgstr "Data Validation"
+
+msgid ""
+"Compare data between a source DHIS2 instance and the portal to identify "
+"discrepancies. Ensure analytics are up-to-date before running. Choose a "
+"connection to start a validation."
+msgstr ""
+"Compare data between a source DHIS2 instance and the portal to identify "
+"discrepancies. Ensure analytics are up-to-date before running. Choose a "
+"connection to start a validation."
+
+msgid "Metadata Migrations"
+msgstr "Metadata Migrations"
+
+msgid ""
+"Transfer visualizations, maps, and dashboards from a source DHIS2 instance "
+"to the portal. Choose a connection to view past runs or trigger a new "
+"migration."
+msgstr ""
+"Transfer visualizations, maps, and dashboards from a source DHIS2 instance "
+"to the portal. Choose a connection to view past runs or trigger a new "
+"migration."
+
+msgid "New connection"
+msgstr "New connection"
 
 msgid "This ID is already in use"
 msgstr "This ID is already in use"
@@ -84,17 +151,20 @@ msgstr "Password"
 msgid "Personal Access Token (PAT)"
 msgstr "Personal Access Token (PAT)"
 
+msgid "Source URL"
+msgstr "Source URL"
+
 msgid "Latest Migration Status"
 msgstr "Latest Migration Status"
 
 msgid "Actions"
 msgstr "Actions"
 
-msgid "Confirm delete"
-msgstr "Confirm delete"
+msgid "Delete connection"
+msgstr "Delete connection"
 
-msgid "Are you sure you want to delete the configuration "
-msgstr "Are you sure you want to delete the configuration "
+msgid "Are you sure you want to delete"
+msgstr "Are you sure you want to delete"
 
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
@@ -102,11 +172,24 @@ msgstr "This action cannot be undone."
 msgid "Delete"
 msgstr "Delete"
 
-msgid "View runs"
-msgstr "View runs"
+msgid ""
+"Manage DHIS2 source connections. Each connection is used across all "
+"migration and validation services."
+msgstr ""
+"Manage DHIS2 source connections. Each connection is used across all "
+"migration and validation services."
 
-msgid "Delete configuration"
-msgstr "Delete configuration"
+msgid "No connections configured yet. Add a connection to get started."
+msgstr "No connections configured yet. Add a connection to get started."
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Select"
+msgstr "Select"
+
+msgid "No connections configured. Add one from the Connections page."
+msgstr "No connections configured. Add one from the Connections page."
 
 msgid "Could not save form, check the logs for more information"
 msgstr "Could not save form, check the logs for more information"
@@ -274,6 +357,15 @@ msgstr "Period Type"
 msgid "There are no data items present"
 msgstr "There are no data items present"
 
+msgid "Delete configuration"
+msgstr "Delete configuration"
+
+msgid "Confirm delete"
+msgstr "Confirm delete"
+
+msgid "Are you sure you want to delete the configuration "
+msgstr "Are you sure you want to delete the configuration "
+
 msgid "Status"
 msgstr "Status"
 
@@ -373,13 +465,13 @@ msgid "Analytics Required"
 msgstr "Analytics Required"
 
 msgid ""
-"Please ensure analytics have been run on the source instance before "
-"proceeding with validation. Running analytics ensures the data is "
-"up-to-date for accurate validation results."
+"Please ensure analytics have been run before proceeding with validation. "
+"Running analytics ensures the data is up-to-date for accurate validation "
+"results."
 msgstr ""
-"Please ensure analytics have been run on the source instance before "
-"proceeding with validation. Running analytics ensures the data is "
-"up-to-date for accurate validation results."
+"Please ensure analytics have been run before proceeding with validation. "
+"Running analytics ensures the data is up-to-date for accurate validation "
+"results."
 
 msgid "Destructive Operation"
 msgstr "Destructive Operation"
@@ -399,15 +491,6 @@ msgstr "Select service type"
 
 msgid "Metadata Migration"
 msgstr "Metadata Migration"
-
-msgid "Data Migration"
-msgstr "Data Migration"
-
-msgid "Data Validation"
-msgstr "Data Validation"
-
-msgid "Data Deletion"
-msgstr "Data Deletion"
 
 msgid "Metadata Source"
 msgstr "Metadata Source"
@@ -450,9 +533,6 @@ msgstr "Deleting data..."
 
 msgid "Requesting run..."
 msgstr "Requesting run..."
-
-msgid "Delete Data"
-msgstr "Delete Data"
 
 msgid "Configuration items"
 msgstr "Configuration items"
@@ -753,14 +833,42 @@ msgstr ""
 "view logs, and monitor the health of your data service."
 
 msgid ""
-"Configure the data service for the web portal application, including data "
-"sources and synchronization settings"
+"Manage data service connections, including data sources and synchronization "
+"settings"
 msgstr ""
-"Configure the data service for the web portal application, including data "
-"sources and synchronization settings"
+"Manage data service connections, including data sources and synchronization "
+"settings"
 
-msgid "Configure data service"
-msgstr "Configure data service"
+msgid "Manage connections"
+msgstr "Manage connections"
+
+msgid ""
+"Migrate metadata such as visualizations and maps from a source DHIS2 "
+"instance"
+msgstr ""
+"Migrate metadata such as visualizations and maps from a source DHIS2 "
+"instance"
+
+msgid "Run metadata migration"
+msgstr "Run metadata migration"
+
+msgid "Migrate data values from a source DHIS2 instance to the portal"
+msgstr "Migrate data values from a source DHIS2 instance to the portal"
+
+msgid "Run data migration"
+msgstr "Run data migration"
+
+msgid "Delete data values for selected configurations and periods from the portal"
+msgstr "Delete data values for selected configurations and periods from the portal"
+
+msgid "Delete data"
+msgstr "Delete data"
+
+msgid "Validate data between the source DHIS2 instance and the portal"
+msgstr "Validate data between the source DHIS2 instance and the portal"
+
+msgid "Validate data"
+msgstr "Validate data"
 
 msgid "Please select at least one visualization or map"
 msgstr "Please select at least one visualization or map"

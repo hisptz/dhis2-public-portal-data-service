@@ -11,25 +11,50 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './modules/__root'
-import { Route as DataServiceConfigurationProviderRouteImport } from './modules/data-service-configuration/_provider'
-import { Route as DataServiceConfigurationProviderConfigIdProviderRouteImport } from './modules/data-service-configuration/_provider/$configId/_provider'
-import { Route as DataServiceConfigurationProviderConfigIdProviderEditProviderRouteImport } from './modules/data-service-configuration/_provider/$configId/_provider/edit/_provider'
+import { Route as MetadataMigrationsProviderRouteImport } from './modules/metadata-migrations/_provider'
+import { Route as DataValidationsProviderRouteImport } from './modules/data-validations/_provider'
+import { Route as DataMigrationsProviderRouteImport } from './modules/data-migrations/_provider'
+import { Route as DataDeletionsProviderRouteImport } from './modules/data-deletions/_provider'
+import { Route as ConnectionsProviderRouteImport } from './modules/connections/_provider'
+import { Route as ConnectionsProviderConfigIdProviderRouteImport } from './modules/connections/_provider/$configId/_provider'
+import { Route as ConnectionsProviderConfigIdProviderEditProviderRouteImport } from './modules/connections/_provider/$configId/_provider/edit/_provider'
 
 const IndexLazyRouteImport = createFileRoute('/')()
-const DataServiceConfigurationProviderIndexLazyRouteImport = createFileRoute(
-    '/data-service-configuration/_provider/'
+const MetadataMigrationsProviderIndexLazyRouteImport = createFileRoute(
+    '/metadata-migrations/_provider/'
 )()
-const DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRouteImport =
+const DataValidationsProviderIndexLazyRouteImport = createFileRoute(
+    '/data-validations/_provider/'
+)()
+const DataMigrationsProviderIndexLazyRouteImport = createFileRoute(
+    '/data-migrations/_provider/'
+)()
+const DataDeletionsProviderIndexLazyRouteImport = createFileRoute(
+    '/data-deletions/_provider/'
+)()
+const ConnectionsProviderIndexLazyRouteImport = createFileRoute(
+    '/connections/_provider/'
+)()
+const MetadataMigrationsProviderConfigIdIndexLazyRouteImport = createFileRoute(
+    '/metadata-migrations/_provider/$configId/'
+)()
+const DataValidationsProviderConfigIdIndexLazyRouteImport = createFileRoute(
+    '/data-validations/_provider/$configId/'
+)()
+const DataMigrationsProviderConfigIdIndexLazyRouteImport = createFileRoute(
+    '/data-migrations/_provider/$configId/'
+)()
+const DataDeletionsProviderConfigIdIndexLazyRouteImport = createFileRoute(
+    '/data-deletions/_provider/$configId/'
+)()
+const DataValidationsProviderConfigIdValidationLogsIndexLazyRouteImport =
+    createFileRoute('/data-validations/_provider/$configId/validation-logs/')()
+const ConnectionsProviderConfigIdProviderIndexLazyRouteImport = createFileRoute(
+    '/connections/_provider/$configId/_provider/'
+)()
+const ConnectionsProviderConfigIdProviderEditProviderIndexLazyRouteImport =
     createFileRoute(
-        '/data-service-configuration/_provider/$configId/validation-logs/'
-    )()
-const DataServiceConfigurationProviderConfigIdProviderIndexLazyRouteImport =
-    createFileRoute(
-        '/data-service-configuration/_provider/$configId/_provider/'
-    )()
-const DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRouteImport =
-    createFileRoute(
-        '/data-service-configuration/_provider/$configId/_provider/edit/_provider/'
+        '/connections/_provider/$configId/_provider/edit/_provider/'
     )()
 
 const IndexLazyRoute = IndexLazyRouteImport.update({
@@ -37,137 +62,295 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
     path: '/',
     getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./modules/index.lazy').then((d) => d.Route))
-const DataServiceConfigurationProviderRoute =
-    DataServiceConfigurationProviderRouteImport.update({
-        id: '/data-service-configuration/_provider',
-        path: '/data-service-configuration',
+const MetadataMigrationsProviderRoute =
+    MetadataMigrationsProviderRouteImport.update({
+        id: '/metadata-migrations/_provider',
+        path: '/metadata-migrations',
         getParentRoute: () => rootRouteImport,
     } as any)
-const DataServiceConfigurationProviderIndexLazyRoute =
-    DataServiceConfigurationProviderIndexLazyRouteImport.update({
+const DataValidationsProviderRoute = DataValidationsProviderRouteImport.update({
+    id: '/data-validations/_provider',
+    path: '/data-validations',
+    getParentRoute: () => rootRouteImport,
+} as any)
+const DataMigrationsProviderRoute = DataMigrationsProviderRouteImport.update({
+    id: '/data-migrations/_provider',
+    path: '/data-migrations',
+    getParentRoute: () => rootRouteImport,
+} as any)
+const DataDeletionsProviderRoute = DataDeletionsProviderRouteImport.update({
+    id: '/data-deletions/_provider',
+    path: '/data-deletions',
+    getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectionsProviderRoute = ConnectionsProviderRouteImport.update({
+    id: '/connections/_provider',
+    path: '/connections',
+    getParentRoute: () => rootRouteImport,
+} as any)
+const MetadataMigrationsProviderIndexLazyRoute =
+    MetadataMigrationsProviderIndexLazyRouteImport.update({
         id: '/',
         path: '/',
-        getParentRoute: () => DataServiceConfigurationProviderRoute,
+        getParentRoute: () => MetadataMigrationsProviderRoute,
     } as any).lazy(() =>
-        import('./modules/data-service-configuration/_provider/index.lazy').then(
+        import('./modules/metadata-migrations/_provider/index.lazy').then(
             (d) => d.Route
         )
     )
-const DataServiceConfigurationProviderConfigIdProviderRoute =
-    DataServiceConfigurationProviderConfigIdProviderRouteImport.update({
+const DataValidationsProviderIndexLazyRoute =
+    DataValidationsProviderIndexLazyRouteImport.update({
+        id: '/',
+        path: '/',
+        getParentRoute: () => DataValidationsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/data-validations/_provider/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const DataMigrationsProviderIndexLazyRoute =
+    DataMigrationsProviderIndexLazyRouteImport.update({
+        id: '/',
+        path: '/',
+        getParentRoute: () => DataMigrationsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/data-migrations/_provider/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const DataDeletionsProviderIndexLazyRoute =
+    DataDeletionsProviderIndexLazyRouteImport.update({
+        id: '/',
+        path: '/',
+        getParentRoute: () => DataDeletionsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/data-deletions/_provider/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const ConnectionsProviderIndexLazyRoute =
+    ConnectionsProviderIndexLazyRouteImport.update({
+        id: '/',
+        path: '/',
+        getParentRoute: () => ConnectionsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/connections/_provider/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const MetadataMigrationsProviderConfigIdIndexLazyRoute =
+    MetadataMigrationsProviderConfigIdIndexLazyRouteImport.update({
+        id: '/$configId/',
+        path: '/$configId/',
+        getParentRoute: () => MetadataMigrationsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/metadata-migrations/_provider/$configId/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const DataValidationsProviderConfigIdIndexLazyRoute =
+    DataValidationsProviderConfigIdIndexLazyRouteImport.update({
+        id: '/$configId/',
+        path: '/$configId/',
+        getParentRoute: () => DataValidationsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/data-validations/_provider/$configId/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const DataMigrationsProviderConfigIdIndexLazyRoute =
+    DataMigrationsProviderConfigIdIndexLazyRouteImport.update({
+        id: '/$configId/',
+        path: '/$configId/',
+        getParentRoute: () => DataMigrationsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/data-migrations/_provider/$configId/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const DataDeletionsProviderConfigIdIndexLazyRoute =
+    DataDeletionsProviderConfigIdIndexLazyRouteImport.update({
+        id: '/$configId/',
+        path: '/$configId/',
+        getParentRoute: () => DataDeletionsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/data-deletions/_provider/$configId/index.lazy').then(
+            (d) => d.Route
+        )
+    )
+const ConnectionsProviderConfigIdProviderRoute =
+    ConnectionsProviderConfigIdProviderRouteImport.update({
         id: '/$configId/_provider',
         path: '/$configId',
-        getParentRoute: () => DataServiceConfigurationProviderRoute,
+        getParentRoute: () => ConnectionsProviderRoute,
     } as any)
-const DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute =
-    DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRouteImport.update(
-        {
-            id: '/$configId/validation-logs/',
-            path: '/$configId/validation-logs/',
-            getParentRoute: () => DataServiceConfigurationProviderRoute,
-        } as any
-    ).lazy(() =>
-        import('./modules/data-service-configuration/_provider/$configId/validation-logs/index.lazy').then(
+const DataValidationsProviderConfigIdValidationLogsIndexLazyRoute =
+    DataValidationsProviderConfigIdValidationLogsIndexLazyRouteImport.update({
+        id: '/$configId/validation-logs/',
+        path: '/$configId/validation-logs/',
+        getParentRoute: () => DataValidationsProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/data-validations/_provider/$configId/validation-logs/index.lazy').then(
             (d) => d.Route
         )
     )
-const DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute =
-    DataServiceConfigurationProviderConfigIdProviderIndexLazyRouteImport.update(
-        {
-            id: '/',
-            path: '/',
-            getParentRoute: () =>
-                DataServiceConfigurationProviderConfigIdProviderRoute,
-        } as any
-    ).lazy(() =>
-        import('./modules/data-service-configuration/_provider/$configId/_provider/index.lazy').then(
+const ConnectionsProviderConfigIdProviderIndexLazyRoute =
+    ConnectionsProviderConfigIdProviderIndexLazyRouteImport.update({
+        id: '/',
+        path: '/',
+        getParentRoute: () => ConnectionsProviderConfigIdProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/connections/_provider/$configId/_provider/index.lazy').then(
             (d) => d.Route
         )
     )
-const DataServiceConfigurationProviderConfigIdProviderEditProviderRoute =
-    DataServiceConfigurationProviderConfigIdProviderEditProviderRouteImport.update(
-        {
-            id: '/edit/_provider',
-            path: '/edit',
-            getParentRoute: () =>
-                DataServiceConfigurationProviderConfigIdProviderRoute,
-        } as any
-    )
-const DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute =
-    DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRouteImport.update(
-        {
-            id: '/',
-            path: '/',
-            getParentRoute: () =>
-                DataServiceConfigurationProviderConfigIdProviderEditProviderRoute,
-        } as any
-    ).lazy(() =>
-        import('./modules/data-service-configuration/_provider/$configId/_provider/edit/_provider/index.lazy').then(
+const ConnectionsProviderConfigIdProviderEditProviderRoute =
+    ConnectionsProviderConfigIdProviderEditProviderRouteImport.update({
+        id: '/edit/_provider',
+        path: '/edit',
+        getParentRoute: () => ConnectionsProviderConfigIdProviderRoute,
+    } as any)
+const ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute =
+    ConnectionsProviderConfigIdProviderEditProviderIndexLazyRouteImport.update({
+        id: '/',
+        path: '/',
+        getParentRoute: () =>
+            ConnectionsProviderConfigIdProviderEditProviderRoute,
+    } as any).lazy(() =>
+        import('./modules/connections/_provider/$configId/_provider/edit/_provider/index.lazy').then(
             (d) => d.Route
         )
     )
 
 export interface FileRoutesByFullPath {
     '/': typeof IndexLazyRoute
-    '/data-service-configuration': typeof DataServiceConfigurationProviderRouteWithChildren
-    '/data-service-configuration/': typeof DataServiceConfigurationProviderIndexLazyRoute
-    '/data-service-configuration/$configId': typeof DataServiceConfigurationProviderConfigIdProviderRouteWithChildren
-    '/data-service-configuration/$configId/': typeof DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute
-    '/data-service-configuration/$configId/validation-logs/': typeof DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute
-    '/data-service-configuration/$configId/edit': typeof DataServiceConfigurationProviderConfigIdProviderEditProviderRouteWithChildren
-    '/data-service-configuration/$configId/edit/': typeof DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute
+    '/connections': typeof ConnectionsProviderRouteWithChildren
+    '/data-deletions': typeof DataDeletionsProviderRouteWithChildren
+    '/data-migrations': typeof DataMigrationsProviderRouteWithChildren
+    '/data-validations': typeof DataValidationsProviderRouteWithChildren
+    '/metadata-migrations': typeof MetadataMigrationsProviderRouteWithChildren
+    '/connections/': typeof ConnectionsProviderIndexLazyRoute
+    '/data-deletions/': typeof DataDeletionsProviderIndexLazyRoute
+    '/data-migrations/': typeof DataMigrationsProviderIndexLazyRoute
+    '/data-validations/': typeof DataValidationsProviderIndexLazyRoute
+    '/metadata-migrations/': typeof MetadataMigrationsProviderIndexLazyRoute
+    '/connections/$configId': typeof ConnectionsProviderConfigIdProviderRouteWithChildren
+    '/data-deletions/$configId/': typeof DataDeletionsProviderConfigIdIndexLazyRoute
+    '/data-migrations/$configId/': typeof DataMigrationsProviderConfigIdIndexLazyRoute
+    '/data-validations/$configId/': typeof DataValidationsProviderConfigIdIndexLazyRoute
+    '/metadata-migrations/$configId/': typeof MetadataMigrationsProviderConfigIdIndexLazyRoute
+    '/connections/$configId/': typeof ConnectionsProviderConfigIdProviderIndexLazyRoute
+    '/data-validations/$configId/validation-logs/': typeof DataValidationsProviderConfigIdValidationLogsIndexLazyRoute
+    '/connections/$configId/edit': typeof ConnectionsProviderConfigIdProviderEditProviderRouteWithChildren
+    '/connections/$configId/edit/': typeof ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute
 }
 export interface FileRoutesByTo {
     '/': typeof IndexLazyRoute
-    '/data-service-configuration': typeof DataServiceConfigurationProviderIndexLazyRoute
-    '/data-service-configuration/$configId': typeof DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute
-    '/data-service-configuration/$configId/validation-logs': typeof DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute
-    '/data-service-configuration/$configId/edit': typeof DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute
+    '/connections': typeof ConnectionsProviderIndexLazyRoute
+    '/data-deletions': typeof DataDeletionsProviderIndexLazyRoute
+    '/data-migrations': typeof DataMigrationsProviderIndexLazyRoute
+    '/data-validations': typeof DataValidationsProviderIndexLazyRoute
+    '/metadata-migrations': typeof MetadataMigrationsProviderIndexLazyRoute
+    '/data-deletions/$configId': typeof DataDeletionsProviderConfigIdIndexLazyRoute
+    '/data-migrations/$configId': typeof DataMigrationsProviderConfigIdIndexLazyRoute
+    '/data-validations/$configId': typeof DataValidationsProviderConfigIdIndexLazyRoute
+    '/metadata-migrations/$configId': typeof MetadataMigrationsProviderConfigIdIndexLazyRoute
+    '/connections/$configId': typeof ConnectionsProviderConfigIdProviderIndexLazyRoute
+    '/data-validations/$configId/validation-logs': typeof DataValidationsProviderConfigIdValidationLogsIndexLazyRoute
+    '/connections/$configId/edit': typeof ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute
 }
 export interface FileRoutesById {
     __root__: typeof rootRouteImport
     '/': typeof IndexLazyRoute
-    '/data-service-configuration/_provider': typeof DataServiceConfigurationProviderRouteWithChildren
-    '/data-service-configuration/_provider/': typeof DataServiceConfigurationProviderIndexLazyRoute
-    '/data-service-configuration/_provider/$configId/_provider': typeof DataServiceConfigurationProviderConfigIdProviderRouteWithChildren
-    '/data-service-configuration/_provider/$configId/_provider/': typeof DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute
-    '/data-service-configuration/_provider/$configId/validation-logs/': typeof DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute
-    '/data-service-configuration/_provider/$configId/_provider/edit/_provider': typeof DataServiceConfigurationProviderConfigIdProviderEditProviderRouteWithChildren
-    '/data-service-configuration/_provider/$configId/_provider/edit/_provider/': typeof DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute
+    '/connections/_provider': typeof ConnectionsProviderRouteWithChildren
+    '/data-deletions/_provider': typeof DataDeletionsProviderRouteWithChildren
+    '/data-migrations/_provider': typeof DataMigrationsProviderRouteWithChildren
+    '/data-validations/_provider': typeof DataValidationsProviderRouteWithChildren
+    '/metadata-migrations/_provider': typeof MetadataMigrationsProviderRouteWithChildren
+    '/connections/_provider/': typeof ConnectionsProviderIndexLazyRoute
+    '/data-deletions/_provider/': typeof DataDeletionsProviderIndexLazyRoute
+    '/data-migrations/_provider/': typeof DataMigrationsProviderIndexLazyRoute
+    '/data-validations/_provider/': typeof DataValidationsProviderIndexLazyRoute
+    '/metadata-migrations/_provider/': typeof MetadataMigrationsProviderIndexLazyRoute
+    '/connections/_provider/$configId/_provider': typeof ConnectionsProviderConfigIdProviderRouteWithChildren
+    '/data-deletions/_provider/$configId/': typeof DataDeletionsProviderConfigIdIndexLazyRoute
+    '/data-migrations/_provider/$configId/': typeof DataMigrationsProviderConfigIdIndexLazyRoute
+    '/data-validations/_provider/$configId/': typeof DataValidationsProviderConfigIdIndexLazyRoute
+    '/metadata-migrations/_provider/$configId/': typeof MetadataMigrationsProviderConfigIdIndexLazyRoute
+    '/connections/_provider/$configId/_provider/': typeof ConnectionsProviderConfigIdProviderIndexLazyRoute
+    '/data-validations/_provider/$configId/validation-logs/': typeof DataValidationsProviderConfigIdValidationLogsIndexLazyRoute
+    '/connections/_provider/$configId/_provider/edit/_provider': typeof ConnectionsProviderConfigIdProviderEditProviderRouteWithChildren
+    '/connections/_provider/$configId/_provider/edit/_provider/': typeof ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute
 }
 export interface FileRouteTypes {
     fileRoutesByFullPath: FileRoutesByFullPath
     fullPaths:
         | '/'
-        | '/data-service-configuration'
-        | '/data-service-configuration/'
-        | '/data-service-configuration/$configId'
-        | '/data-service-configuration/$configId/'
-        | '/data-service-configuration/$configId/validation-logs/'
-        | '/data-service-configuration/$configId/edit'
-        | '/data-service-configuration/$configId/edit/'
+        | '/connections'
+        | '/data-deletions'
+        | '/data-migrations'
+        | '/data-validations'
+        | '/metadata-migrations'
+        | '/connections/'
+        | '/data-deletions/'
+        | '/data-migrations/'
+        | '/data-validations/'
+        | '/metadata-migrations/'
+        | '/connections/$configId'
+        | '/data-deletions/$configId/'
+        | '/data-migrations/$configId/'
+        | '/data-validations/$configId/'
+        | '/metadata-migrations/$configId/'
+        | '/connections/$configId/'
+        | '/data-validations/$configId/validation-logs/'
+        | '/connections/$configId/edit'
+        | '/connections/$configId/edit/'
     fileRoutesByTo: FileRoutesByTo
     to:
         | '/'
-        | '/data-service-configuration'
-        | '/data-service-configuration/$configId'
-        | '/data-service-configuration/$configId/validation-logs'
-        | '/data-service-configuration/$configId/edit'
+        | '/connections'
+        | '/data-deletions'
+        | '/data-migrations'
+        | '/data-validations'
+        | '/metadata-migrations'
+        | '/data-deletions/$configId'
+        | '/data-migrations/$configId'
+        | '/data-validations/$configId'
+        | '/metadata-migrations/$configId'
+        | '/connections/$configId'
+        | '/data-validations/$configId/validation-logs'
+        | '/connections/$configId/edit'
     id:
         | '__root__'
         | '/'
-        | '/data-service-configuration/_provider'
-        | '/data-service-configuration/_provider/'
-        | '/data-service-configuration/_provider/$configId/_provider'
-        | '/data-service-configuration/_provider/$configId/_provider/'
-        | '/data-service-configuration/_provider/$configId/validation-logs/'
-        | '/data-service-configuration/_provider/$configId/_provider/edit/_provider'
-        | '/data-service-configuration/_provider/$configId/_provider/edit/_provider/'
+        | '/connections/_provider'
+        | '/data-deletions/_provider'
+        | '/data-migrations/_provider'
+        | '/data-validations/_provider'
+        | '/metadata-migrations/_provider'
+        | '/connections/_provider/'
+        | '/data-deletions/_provider/'
+        | '/data-migrations/_provider/'
+        | '/data-validations/_provider/'
+        | '/metadata-migrations/_provider/'
+        | '/connections/_provider/$configId/_provider'
+        | '/data-deletions/_provider/$configId/'
+        | '/data-migrations/_provider/$configId/'
+        | '/data-validations/_provider/$configId/'
+        | '/metadata-migrations/_provider/$configId/'
+        | '/connections/_provider/$configId/_provider/'
+        | '/data-validations/_provider/$configId/validation-logs/'
+        | '/connections/_provider/$configId/_provider/edit/_provider'
+        | '/connections/_provider/$configId/_provider/edit/_provider/'
     fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
     IndexLazyRoute: typeof IndexLazyRoute
-    DataServiceConfigurationProviderRoute: typeof DataServiceConfigurationProviderRouteWithChildren
+    ConnectionsProviderRoute: typeof ConnectionsProviderRouteWithChildren
+    DataDeletionsProviderRoute: typeof DataDeletionsProviderRouteWithChildren
+    DataMigrationsProviderRoute: typeof DataMigrationsProviderRouteWithChildren
+    DataValidationsProviderRoute: typeof DataValidationsProviderRouteWithChildren
+    MetadataMigrationsProviderRoute: typeof MetadataMigrationsProviderRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -179,116 +362,270 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof IndexLazyRouteImport
             parentRoute: typeof rootRouteImport
         }
-        '/data-service-configuration/_provider': {
-            id: '/data-service-configuration/_provider'
-            path: '/data-service-configuration'
-            fullPath: '/data-service-configuration'
-            preLoaderRoute: typeof DataServiceConfigurationProviderRouteImport
+        '/metadata-migrations/_provider': {
+            id: '/metadata-migrations/_provider'
+            path: '/metadata-migrations'
+            fullPath: '/metadata-migrations'
+            preLoaderRoute: typeof MetadataMigrationsProviderRouteImport
             parentRoute: typeof rootRouteImport
         }
-        '/data-service-configuration/_provider/': {
-            id: '/data-service-configuration/_provider/'
-            path: '/'
-            fullPath: '/data-service-configuration/'
-            preLoaderRoute: typeof DataServiceConfigurationProviderIndexLazyRouteImport
-            parentRoute: typeof DataServiceConfigurationProviderRoute
+        '/data-validations/_provider': {
+            id: '/data-validations/_provider'
+            path: '/data-validations'
+            fullPath: '/data-validations'
+            preLoaderRoute: typeof DataValidationsProviderRouteImport
+            parentRoute: typeof rootRouteImport
         }
-        '/data-service-configuration/_provider/$configId/_provider': {
-            id: '/data-service-configuration/_provider/$configId/_provider'
+        '/data-migrations/_provider': {
+            id: '/data-migrations/_provider'
+            path: '/data-migrations'
+            fullPath: '/data-migrations'
+            preLoaderRoute: typeof DataMigrationsProviderRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/data-deletions/_provider': {
+            id: '/data-deletions/_provider'
+            path: '/data-deletions'
+            fullPath: '/data-deletions'
+            preLoaderRoute: typeof DataDeletionsProviderRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/connections/_provider': {
+            id: '/connections/_provider'
+            path: '/connections'
+            fullPath: '/connections'
+            preLoaderRoute: typeof ConnectionsProviderRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/metadata-migrations/_provider/': {
+            id: '/metadata-migrations/_provider/'
+            path: '/'
+            fullPath: '/metadata-migrations/'
+            preLoaderRoute: typeof MetadataMigrationsProviderIndexLazyRouteImport
+            parentRoute: typeof MetadataMigrationsProviderRoute
+        }
+        '/data-validations/_provider/': {
+            id: '/data-validations/_provider/'
+            path: '/'
+            fullPath: '/data-validations/'
+            preLoaderRoute: typeof DataValidationsProviderIndexLazyRouteImport
+            parentRoute: typeof DataValidationsProviderRoute
+        }
+        '/data-migrations/_provider/': {
+            id: '/data-migrations/_provider/'
+            path: '/'
+            fullPath: '/data-migrations/'
+            preLoaderRoute: typeof DataMigrationsProviderIndexLazyRouteImport
+            parentRoute: typeof DataMigrationsProviderRoute
+        }
+        '/data-deletions/_provider/': {
+            id: '/data-deletions/_provider/'
+            path: '/'
+            fullPath: '/data-deletions/'
+            preLoaderRoute: typeof DataDeletionsProviderIndexLazyRouteImport
+            parentRoute: typeof DataDeletionsProviderRoute
+        }
+        '/connections/_provider/': {
+            id: '/connections/_provider/'
+            path: '/'
+            fullPath: '/connections/'
+            preLoaderRoute: typeof ConnectionsProviderIndexLazyRouteImport
+            parentRoute: typeof ConnectionsProviderRoute
+        }
+        '/metadata-migrations/_provider/$configId/': {
+            id: '/metadata-migrations/_provider/$configId/'
             path: '/$configId'
-            fullPath: '/data-service-configuration/$configId'
-            preLoaderRoute: typeof DataServiceConfigurationProviderConfigIdProviderRouteImport
-            parentRoute: typeof DataServiceConfigurationProviderRoute
+            fullPath: '/metadata-migrations/$configId/'
+            preLoaderRoute: typeof MetadataMigrationsProviderConfigIdIndexLazyRouteImport
+            parentRoute: typeof MetadataMigrationsProviderRoute
         }
-        '/data-service-configuration/_provider/$configId/validation-logs/': {
-            id: '/data-service-configuration/_provider/$configId/validation-logs/'
+        '/data-validations/_provider/$configId/': {
+            id: '/data-validations/_provider/$configId/'
+            path: '/$configId'
+            fullPath: '/data-validations/$configId/'
+            preLoaderRoute: typeof DataValidationsProviderConfigIdIndexLazyRouteImport
+            parentRoute: typeof DataValidationsProviderRoute
+        }
+        '/data-migrations/_provider/$configId/': {
+            id: '/data-migrations/_provider/$configId/'
+            path: '/$configId'
+            fullPath: '/data-migrations/$configId/'
+            preLoaderRoute: typeof DataMigrationsProviderConfigIdIndexLazyRouteImport
+            parentRoute: typeof DataMigrationsProviderRoute
+        }
+        '/data-deletions/_provider/$configId/': {
+            id: '/data-deletions/_provider/$configId/'
+            path: '/$configId'
+            fullPath: '/data-deletions/$configId/'
+            preLoaderRoute: typeof DataDeletionsProviderConfigIdIndexLazyRouteImport
+            parentRoute: typeof DataDeletionsProviderRoute
+        }
+        '/connections/_provider/$configId/_provider': {
+            id: '/connections/_provider/$configId/_provider'
+            path: '/$configId'
+            fullPath: '/connections/$configId'
+            preLoaderRoute: typeof ConnectionsProviderConfigIdProviderRouteImport
+            parentRoute: typeof ConnectionsProviderRoute
+        }
+        '/data-validations/_provider/$configId/validation-logs/': {
+            id: '/data-validations/_provider/$configId/validation-logs/'
             path: '/$configId/validation-logs'
-            fullPath: '/data-service-configuration/$configId/validation-logs/'
-            preLoaderRoute: typeof DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRouteImport
-            parentRoute: typeof DataServiceConfigurationProviderRoute
+            fullPath: '/data-validations/$configId/validation-logs/'
+            preLoaderRoute: typeof DataValidationsProviderConfigIdValidationLogsIndexLazyRouteImport
+            parentRoute: typeof DataValidationsProviderRoute
         }
-        '/data-service-configuration/_provider/$configId/_provider/': {
-            id: '/data-service-configuration/_provider/$configId/_provider/'
+        '/connections/_provider/$configId/_provider/': {
+            id: '/connections/_provider/$configId/_provider/'
             path: '/'
-            fullPath: '/data-service-configuration/$configId/'
-            preLoaderRoute: typeof DataServiceConfigurationProviderConfigIdProviderIndexLazyRouteImport
-            parentRoute: typeof DataServiceConfigurationProviderConfigIdProviderRoute
+            fullPath: '/connections/$configId/'
+            preLoaderRoute: typeof ConnectionsProviderConfigIdProviderIndexLazyRouteImport
+            parentRoute: typeof ConnectionsProviderConfigIdProviderRoute
         }
-        '/data-service-configuration/_provider/$configId/_provider/edit/_provider': {
-            id: '/data-service-configuration/_provider/$configId/_provider/edit/_provider'
+        '/connections/_provider/$configId/_provider/edit/_provider': {
+            id: '/connections/_provider/$configId/_provider/edit/_provider'
             path: '/edit'
-            fullPath: '/data-service-configuration/$configId/edit'
-            preLoaderRoute: typeof DataServiceConfigurationProviderConfigIdProviderEditProviderRouteImport
-            parentRoute: typeof DataServiceConfigurationProviderConfigIdProviderRoute
+            fullPath: '/connections/$configId/edit'
+            preLoaderRoute: typeof ConnectionsProviderConfigIdProviderEditProviderRouteImport
+            parentRoute: typeof ConnectionsProviderConfigIdProviderRoute
         }
-        '/data-service-configuration/_provider/$configId/_provider/edit/_provider/': {
-            id: '/data-service-configuration/_provider/$configId/_provider/edit/_provider/'
+        '/connections/_provider/$configId/_provider/edit/_provider/': {
+            id: '/connections/_provider/$configId/_provider/edit/_provider/'
             path: '/'
-            fullPath: '/data-service-configuration/$configId/edit/'
-            preLoaderRoute: typeof DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRouteImport
-            parentRoute: typeof DataServiceConfigurationProviderConfigIdProviderEditProviderRoute
+            fullPath: '/connections/$configId/edit/'
+            preLoaderRoute: typeof ConnectionsProviderConfigIdProviderEditProviderIndexLazyRouteImport
+            parentRoute: typeof ConnectionsProviderConfigIdProviderEditProviderRoute
         }
     }
 }
 
-interface DataServiceConfigurationProviderConfigIdProviderEditProviderRouteChildren {
-    DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute: typeof DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute
+interface ConnectionsProviderConfigIdProviderEditProviderRouteChildren {
+    ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute: typeof ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute
 }
 
-const DataServiceConfigurationProviderConfigIdProviderEditProviderRouteChildren: DataServiceConfigurationProviderConfigIdProviderEditProviderRouteChildren =
+const ConnectionsProviderConfigIdProviderEditProviderRouteChildren: ConnectionsProviderConfigIdProviderEditProviderRouteChildren =
     {
-        DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute:
-            DataServiceConfigurationProviderConfigIdProviderEditProviderIndexLazyRoute,
+        ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute:
+            ConnectionsProviderConfigIdProviderEditProviderIndexLazyRoute,
     }
 
-const DataServiceConfigurationProviderConfigIdProviderEditProviderRouteWithChildren =
-    DataServiceConfigurationProviderConfigIdProviderEditProviderRoute._addFileChildren(
-        DataServiceConfigurationProviderConfigIdProviderEditProviderRouteChildren
+const ConnectionsProviderConfigIdProviderEditProviderRouteWithChildren =
+    ConnectionsProviderConfigIdProviderEditProviderRoute._addFileChildren(
+        ConnectionsProviderConfigIdProviderEditProviderRouteChildren
     )
 
-interface DataServiceConfigurationProviderConfigIdProviderRouteChildren {
-    DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute: typeof DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute
-    DataServiceConfigurationProviderConfigIdProviderEditProviderRoute: typeof DataServiceConfigurationProviderConfigIdProviderEditProviderRouteWithChildren
+interface ConnectionsProviderConfigIdProviderRouteChildren {
+    ConnectionsProviderConfigIdProviderIndexLazyRoute: typeof ConnectionsProviderConfigIdProviderIndexLazyRoute
+    ConnectionsProviderConfigIdProviderEditProviderRoute: typeof ConnectionsProviderConfigIdProviderEditProviderRouteWithChildren
 }
 
-const DataServiceConfigurationProviderConfigIdProviderRouteChildren: DataServiceConfigurationProviderConfigIdProviderRouteChildren =
+const ConnectionsProviderConfigIdProviderRouteChildren: ConnectionsProviderConfigIdProviderRouteChildren =
     {
-        DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute:
-            DataServiceConfigurationProviderConfigIdProviderIndexLazyRoute,
-        DataServiceConfigurationProviderConfigIdProviderEditProviderRoute:
-            DataServiceConfigurationProviderConfigIdProviderEditProviderRouteWithChildren,
+        ConnectionsProviderConfigIdProviderIndexLazyRoute:
+            ConnectionsProviderConfigIdProviderIndexLazyRoute,
+        ConnectionsProviderConfigIdProviderEditProviderRoute:
+            ConnectionsProviderConfigIdProviderEditProviderRouteWithChildren,
     }
 
-const DataServiceConfigurationProviderConfigIdProviderRouteWithChildren =
-    DataServiceConfigurationProviderConfigIdProviderRoute._addFileChildren(
-        DataServiceConfigurationProviderConfigIdProviderRouteChildren
+const ConnectionsProviderConfigIdProviderRouteWithChildren =
+    ConnectionsProviderConfigIdProviderRoute._addFileChildren(
+        ConnectionsProviderConfigIdProviderRouteChildren
     )
 
-interface DataServiceConfigurationProviderRouteChildren {
-    DataServiceConfigurationProviderIndexLazyRoute: typeof DataServiceConfigurationProviderIndexLazyRoute
-    DataServiceConfigurationProviderConfigIdProviderRoute: typeof DataServiceConfigurationProviderConfigIdProviderRouteWithChildren
-    DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute: typeof DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute
+interface ConnectionsProviderRouteChildren {
+    ConnectionsProviderIndexLazyRoute: typeof ConnectionsProviderIndexLazyRoute
+    ConnectionsProviderConfigIdProviderRoute: typeof ConnectionsProviderConfigIdProviderRouteWithChildren
 }
 
-const DataServiceConfigurationProviderRouteChildren: DataServiceConfigurationProviderRouteChildren =
+const ConnectionsProviderRouteChildren: ConnectionsProviderRouteChildren = {
+    ConnectionsProviderIndexLazyRoute: ConnectionsProviderIndexLazyRoute,
+    ConnectionsProviderConfigIdProviderRoute:
+        ConnectionsProviderConfigIdProviderRouteWithChildren,
+}
+
+const ConnectionsProviderRouteWithChildren =
+    ConnectionsProviderRoute._addFileChildren(ConnectionsProviderRouteChildren)
+
+interface DataDeletionsProviderRouteChildren {
+    DataDeletionsProviderIndexLazyRoute: typeof DataDeletionsProviderIndexLazyRoute
+    DataDeletionsProviderConfigIdIndexLazyRoute: typeof DataDeletionsProviderConfigIdIndexLazyRoute
+}
+
+const DataDeletionsProviderRouteChildren: DataDeletionsProviderRouteChildren = {
+    DataDeletionsProviderIndexLazyRoute: DataDeletionsProviderIndexLazyRoute,
+    DataDeletionsProviderConfigIdIndexLazyRoute:
+        DataDeletionsProviderConfigIdIndexLazyRoute,
+}
+
+const DataDeletionsProviderRouteWithChildren =
+    DataDeletionsProviderRoute._addFileChildren(
+        DataDeletionsProviderRouteChildren
+    )
+
+interface DataMigrationsProviderRouteChildren {
+    DataMigrationsProviderIndexLazyRoute: typeof DataMigrationsProviderIndexLazyRoute
+    DataMigrationsProviderConfigIdIndexLazyRoute: typeof DataMigrationsProviderConfigIdIndexLazyRoute
+}
+
+const DataMigrationsProviderRouteChildren: DataMigrationsProviderRouteChildren =
     {
-        DataServiceConfigurationProviderIndexLazyRoute:
-            DataServiceConfigurationProviderIndexLazyRoute,
-        DataServiceConfigurationProviderConfigIdProviderRoute:
-            DataServiceConfigurationProviderConfigIdProviderRouteWithChildren,
-        DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute:
-            DataServiceConfigurationProviderConfigIdValidationLogsIndexLazyRoute,
+        DataMigrationsProviderIndexLazyRoute:
+            DataMigrationsProviderIndexLazyRoute,
+        DataMigrationsProviderConfigIdIndexLazyRoute:
+            DataMigrationsProviderConfigIdIndexLazyRoute,
     }
 
-const DataServiceConfigurationProviderRouteWithChildren =
-    DataServiceConfigurationProviderRoute._addFileChildren(
-        DataServiceConfigurationProviderRouteChildren
+const DataMigrationsProviderRouteWithChildren =
+    DataMigrationsProviderRoute._addFileChildren(
+        DataMigrationsProviderRouteChildren
+    )
+
+interface DataValidationsProviderRouteChildren {
+    DataValidationsProviderIndexLazyRoute: typeof DataValidationsProviderIndexLazyRoute
+    DataValidationsProviderConfigIdIndexLazyRoute: typeof DataValidationsProviderConfigIdIndexLazyRoute
+    DataValidationsProviderConfigIdValidationLogsIndexLazyRoute: typeof DataValidationsProviderConfigIdValidationLogsIndexLazyRoute
+}
+
+const DataValidationsProviderRouteChildren: DataValidationsProviderRouteChildren =
+    {
+        DataValidationsProviderIndexLazyRoute:
+            DataValidationsProviderIndexLazyRoute,
+        DataValidationsProviderConfigIdIndexLazyRoute:
+            DataValidationsProviderConfigIdIndexLazyRoute,
+        DataValidationsProviderConfigIdValidationLogsIndexLazyRoute:
+            DataValidationsProviderConfigIdValidationLogsIndexLazyRoute,
+    }
+
+const DataValidationsProviderRouteWithChildren =
+    DataValidationsProviderRoute._addFileChildren(
+        DataValidationsProviderRouteChildren
+    )
+
+interface MetadataMigrationsProviderRouteChildren {
+    MetadataMigrationsProviderIndexLazyRoute: typeof MetadataMigrationsProviderIndexLazyRoute
+    MetadataMigrationsProviderConfigIdIndexLazyRoute: typeof MetadataMigrationsProviderConfigIdIndexLazyRoute
+}
+
+const MetadataMigrationsProviderRouteChildren: MetadataMigrationsProviderRouteChildren =
+    {
+        MetadataMigrationsProviderIndexLazyRoute:
+            MetadataMigrationsProviderIndexLazyRoute,
+        MetadataMigrationsProviderConfigIdIndexLazyRoute:
+            MetadataMigrationsProviderConfigIdIndexLazyRoute,
+    }
+
+const MetadataMigrationsProviderRouteWithChildren =
+    MetadataMigrationsProviderRoute._addFileChildren(
+        MetadataMigrationsProviderRouteChildren
     )
 
 const rootRouteChildren: RootRouteChildren = {
     IndexLazyRoute: IndexLazyRoute,
-    DataServiceConfigurationProviderRoute:
-        DataServiceConfigurationProviderRouteWithChildren,
+    ConnectionsProviderRoute: ConnectionsProviderRouteWithChildren,
+    DataDeletionsProviderRoute: DataDeletionsProviderRouteWithChildren,
+    DataMigrationsProviderRoute: DataMigrationsProviderRouteWithChildren,
+    DataValidationsProviderRoute: DataValidationsProviderRouteWithChildren,
+    MetadataMigrationsProviderRoute:
+        MetadataMigrationsProviderRouteWithChildren,
 }
 export const routeTree = rootRouteImport
     ._addFileChildren(rootRouteChildren)

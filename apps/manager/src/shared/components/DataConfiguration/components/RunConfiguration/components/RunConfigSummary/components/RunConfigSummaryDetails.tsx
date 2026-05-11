@@ -129,6 +129,7 @@ export function RunConfigSummaryDetails({
     runType,
     downloadsPagination,
     uploadsPagination,
+    configId,
 }: {
     run: MetadataRunDetails | DataRunDetails
     runType: 'metadata' | 'data'
@@ -148,6 +149,7 @@ export function RunConfigSummaryDetails({
         onPageChange: (page: number) => void
         onPageSizeChange: (pageSize: number) => void
     }
+    configId: string
 }) {
     const [statusFilter, setStatusFilter] = useState<RunStatus | null>(null)
 
@@ -203,6 +205,7 @@ export function RunConfigSummaryDetails({
                                 type="download"
                                 runType={runType}
                                 runID={run.uid}
+                                configId={configId}
                             />
                         ),
                         errors: (
@@ -213,6 +216,7 @@ export function RunConfigSummaryDetails({
                                 taskId={summary.uid}
                                 error={summary.error}
                                 errorObject={summary.errorObject}
+                                configId={configId}
                             />
                         ),
                     })
@@ -259,6 +263,7 @@ export function RunConfigSummaryDetails({
                                 type="upload"
                                 runType={runType}
                                 runID={run.uid}
+                                configId={configId}
                             />
                         ),
                         errors: (
@@ -269,6 +274,7 @@ export function RunConfigSummaryDetails({
                                 taskId={summary.uid}
                                 error={summary.error}
                                 errorObject={summary.errorObject}
+                                configId={configId}
                             />
                         ),
                     })
@@ -368,6 +374,7 @@ export function RunConfigSummaryDetails({
                         downloads={selectedDownloads}
                         type={runType}
                         runId={run.uid}
+                        configId={configId}
                         onComplete={() => {
                             setSelectedDownloads([])
                             setSelectedUploads([])

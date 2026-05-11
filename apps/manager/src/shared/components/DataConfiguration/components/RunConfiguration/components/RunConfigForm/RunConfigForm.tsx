@@ -40,18 +40,22 @@ export function RunConfigForm({
     config,
     onClose,
     onRunComplete,
+    preselectedService,
 }: {
     config: DataServiceConfig
     hide: boolean
     onRunComplete: () => void
     onClose: () => void
+    preselectedService?:
+        | 'metadata-migration'
+        | 'data-migration'
+        | 'data-deletion'
+        | 'data-validation'
 }) {
     const queryClient = useQueryClient()
     const engine = useDataEngine()
     const { serverVersion } = useConfig()
-    const navigate = useNavigate({
-        from: '/data-service-configuration/',
-    })
+    const navigate = useNavigate()
     const startValidation = useStartValidation(config.id, config)
     const { show, hide: hideAlert } = useAlert(
         ({ message }) => message,
@@ -60,7 +64,7 @@ export function RunConfigForm({
     const form = useForm<RunConfigFormValues>({
         resolver: zodResolver(runConfigSchema),
         defaultValues: {
-            service: 'metadata-migration',
+            service: preselectedService ?? 'metadata-migration',
             metadataSource: 'source',
             metadataTypes: [],
             selectedVisualizations: [],
@@ -213,7 +217,8 @@ export function RunConfigForm({
             if (data.service === 'data-validation') {
                 onClose()
                 navigate({
-                    to: `${config.id}/validation-logs`,
+                    to: `/data-validations/$configId/validation-logs`,
+                    params: { configId: config.id },
                 })
             } else {
                 onClose()
@@ -255,7 +260,7 @@ export function RunConfigForm({
                                 title={i18n.t('Analytics Required')}
                             >
                                 {i18n.t(
-                                    'Please ensure analytics have been run on the source instance before proceeding with validation. Running analytics ensures the data is up-to-date for accurate validation results.'
+                                    'Please ensure analytics have been run before proceeding with validation. Running analytics ensures the data is up-to-date for accurate validation results.'
                                 )}
                             </NoticeBox>
                         )}
@@ -269,30 +274,32 @@ export function RunConfigForm({
                                 )}
                             </NoticeBox>
                         )}
-                        <RHFSingleSelectField
-                            label={i18n.t('Service Type')}
-                            name="service"
-                            placeholder={i18n.t('Select service type')}
-                            required
-                            options={[
-                                {
-                                    label: i18n.t('Metadata Migration'),
-                                    value: 'metadata-migration',
-                                },
-                                {
-                                    label: i18n.t('Data Migration'),
-                                    value: 'data-migration',
-                                },
-                                {
-                                    label: i18n.t('Data Validation'),
-                                    value: 'data-validation',
-                                },
-                                {
-                                    label: i18n.t('Data Deletion'),
-                                    value: 'data-deletion',
-                                },
-                            ]}
-                        />
+                        {!preselectedService && (
+                            <RHFSingleSelectField
+                                label={i18n.t('Service Type')}
+                                name="service"
+                                placeholder={i18n.t('Select service type')}
+                                required
+                                options={[
+                                    {
+                                        label: i18n.t('Metadata Migration'),
+                                        value: 'metadata-migration',
+                                    },
+                                    {
+                                        label: i18n.t('Data Migration'),
+                                        value: 'data-migration',
+                                    },
+                                    {
+                                        label: i18n.t('Data Validation'),
+                                        value: 'data-validation',
+                                    },
+                                    {
+                                        label: i18n.t('Data Deletion'),
+                                        value: 'data-deletion',
+                                    },
+                                ]}
+                            />
+                        )}
                         {selectedService === 'metadata-migration' && (
                             <>
                                 <RHFSingleSelectField

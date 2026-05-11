@@ -22,12 +22,14 @@ import { formatDateTime } from '@/shared/hooks/config'
 function Content({
     runId,
     type,
+    configId,
 }: {
     runId: string
     type: 'metadata' | 'data'
+    configId: string
 }) {
     const { run, loading, error, downloadsPagination, uploadsPagination } =
-        useRunDetails({ runId, type })
+        useRunDetails({ runId, type, configId })
 
     if (loading) {
         return (
@@ -54,7 +56,7 @@ function Content({
                         {i18n.t('Run summary ')} -{' '}
                         {formatDateTime(run?.startedAt) ?? 'N/A'}
                     </span>
-                    <RunStatus runId={runId} type={type} />
+                    <RunStatus runId={runId} type={type} configId={configId} />
                 </div>
             </ModalTitle>
 
@@ -75,6 +77,7 @@ function Content({
                                 runType={type}
                                 downloadsPagination={downloadsPagination}
                                 uploadsPagination={uploadsPagination}
+                                configId={configId}
                             />
                         )}
                     </div>
@@ -89,15 +92,17 @@ export function RunConfigSummaryModal({
     onClose,
     runId,
     type,
+    configId,
 }: {
     hide: boolean
     onClose: () => void
     runId: string
     type: 'metadata' | 'data'
+    configId: string
 }) {
     return (
         <Modal fluid hide={hide} onClose={onClose} position="middle">
-            <Content runId={runId} type={type} />
+            <Content runId={runId} type={type} configId={configId} />
             <ModalActions>
                 <ButtonStrip>
                     <Button onClick={onClose}>{i18n.t('Dismiss')}</Button>

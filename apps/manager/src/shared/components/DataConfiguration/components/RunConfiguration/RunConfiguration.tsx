@@ -9,10 +9,16 @@ export function RunConfiguration({
     config,
     label,
     onRunComplete,
+    preselectedService,
 }: {
     config: DataServiceConfig
     label?: string
     onRunComplete: () => void
+    preselectedService?:
+        | 'metadata-migration'
+        | 'data-migration'
+        | 'data-deletion'
+        | 'data-validation'
 }) {
     const { value: hide, setTrue: onClose, setFalse: onShow } = useBoolean(true)
     return (
@@ -23,6 +29,7 @@ export function RunConfiguration({
                     config={config}
                     hide={hide}
                     onClose={onClose}
+                    preselectedService={preselectedService}
                 />
             )}
             <Tooltip content={i18n.t('Run configuration')}>

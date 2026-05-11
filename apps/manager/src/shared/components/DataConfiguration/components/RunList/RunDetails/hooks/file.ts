@@ -1,5 +1,3 @@
-import { useWatch } from 'react-hook-form'
-import type { DataServiceConfig } from '@/shared/schemas/data-service'
 import { useAlert, useConfig } from '@dhis2/app-runtime'
 import { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
@@ -8,13 +6,14 @@ export function useFailedTaskDownload({
     runId,
     taskId,
     type,
+    configId,
 }: {
     runId: string
     taskId: string
     type: 'metadata' | 'data'
+    configId: string
 }) {
     const { baseUrl } = useConfig()
-    const config = useWatch<DataServiceConfig>()
     const [loading, setLoading] = useState(false)
     const { show, hide } = useAlert(
         ({ message }) => message,
@@ -32,16 +31,14 @@ export function useFailedTaskDownload({
     }
 
     const download = async () => {
-        if (!config?.id || !type || !runId || !taskId) {
+        if (!configId || !type || !runId || !taskId) {
             return
         }
 
         setLoading(true)
-
         try {
             hide()
-            const url = `${baseUrl}/api/routes/data-service/run/${config.id}/${type}/${runId}/${taskId}/file`
-
+            const url = `${baseUrl}/api/routes/data-service/run/${configId}/${type}/${runId}/${taskId}/file`
             const res = await fetch(url, {
                 method: 'GET',
                 credentials: 'include',
@@ -52,7 +49,6 @@ export function useFailedTaskDownload({
             }
 
             const blob = await res.blob()
-
             const objectUrl = URL.createObjectURL(blob)
             const a = document.createElement('a')
             a.href = objectUrl
@@ -66,7 +62,6 @@ export function useFailedTaskDownload({
 
             document.body.appendChild(a)
             a.click()
-
             a.remove()
             URL.revokeObjectURL(objectUrl)
             show({
@@ -74,13 +69,11 @@ export function useFailedTaskDownload({
                 type: { success: true },
             })
         } catch (error) {
-            show({
-                message: getErrorMessage(error),
-                type: { critical: true },
-            })
+            show({ message: getErrorMessage(error), type: { critical: true } })
         } finally {
             setLoading(false)
         }
     }
+
     return { download, loading }
 }

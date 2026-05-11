@@ -22,10 +22,8 @@ import {
 } from '@dhis2/ui'
 import { useAlert, useDataMutation } from '@dhis2/app-runtime'
 import { useQueryClient } from '@tanstack/react-query'
-import { useWatch } from 'react-hook-form'
 import {
     DataErrorObject,
-    DataServiceConfig,
     MetadataErrorObject,
 } from '@/shared/schemas/data-service'
 
@@ -317,25 +315,22 @@ function RetryButton({
     taskId,
     runType,
     type,
+    configId,
 }: {
     runId: string
     taskId: string
     runType: 'metadata' | 'data'
     type: 'download' | 'upload'
+    configId: string
 }) {
-    const config = useWatch<DataServiceConfig>()
     const queryClient = useQueryClient()
     const { show } = useAlert(
         ({ message }) => message,
         ({ type }) => ({ ...type, duration: 3000 })
     )
 
-    if (!config || !config.id) {
-        return
-    }
-
     const [mutate, { loading }] = useDataMutation(
-        generateRetryMutation({ runId, configId: config.id, type: runType }),
+        generateRetryMutation({ runId, configId, type: runType }),
         {
             onComplete: () => {
                 show({
@@ -343,10 +338,10 @@ function RetryButton({
                     type: { success: true },
                 })
                 queryClient.invalidateQueries({
-                    queryKey: [config.id, 'runs', runId],
+                    queryKey: [configId, 'runs', runId],
                 })
                 queryClient.invalidateQueries({
-                    queryKey: [config.id, 'runs', runId, 'status'],
+                    queryKey: [configId, 'runs', runId, 'status'],
                 })
             },
             onError: (error) => {
@@ -399,26 +394,23 @@ export function MultipleRetryButton({
     uploads,
     downloads,
     onComplete,
+    configId,
 }: {
     runId: string
     type: 'metadata' | 'data'
     uploads?: string[]
     downloads?: string[]
     onComplete(): void
+    configId: string
 }) {
-    const config = useWatch<DataServiceConfig>()
     const queryClient = useQueryClient()
     const { show } = useAlert(
         ({ message }) => message,
         ({ type }) => ({ ...type, duration: 3000 })
     )
 
-    if (!config || !config.id) {
-        return
-    }
-
     const [mutate, { loading }] = useDataMutation(
-        generateRetryMutation({ runId, configId: config.id!, type }),
+        generateRetryMutation({ runId, configId, type }),
         {
             onComplete: async () => {
                 show({
@@ -426,10 +418,10 @@ export function MultipleRetryButton({
                     type: { success: true },
                 })
                 queryClient.invalidateQueries({
-                    queryKey: [config.id, 'runs', runId],
+                    queryKey: [configId, 'runs', runId],
                 })
                 queryClient.invalidateQueries({
-                    queryKey: [config.id, 'runs', runId, 'status'],
+                    queryKey: [configId, 'runs', runId, 'status'],
                 })
                 onComplete()
             },
@@ -470,6 +462,7 @@ export function RunConfigSummaryLogs({
     type,
     runType,
     taskId,
+    configId,
 }: {
     error?: string
     errorObject?: MetadataErrorObject | DataErrorObject
@@ -477,6 +470,7 @@ export function RunConfigSummaryLogs({
     taskId: string
     runType: 'metadata' | 'data'
     type: 'download' | 'upload'
+    configId: string
 }) {
     const { value: hide, setTrue: onHide, setFalse: onShow } = useBoolean(true)
 
@@ -506,6 +500,7 @@ export function RunConfigSummaryLogs({
                 runType={runType}
                 taskId={taskId}
                 type={type}
+                configId={configId}
             />
         </ButtonStrip>
     )

@@ -1,4 +1,8 @@
-import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
+import {
+    createLazyFileRoute,
+    useNavigate,
+    useParams,
+} from '@tanstack/react-router'
 import {
     Button,
     ButtonStrip,
@@ -10,7 +14,7 @@ import {
 import i18n from '@dhis2/d2-i18n'
 import { FormTestConnection } from '@/shared/components/DataConfiguration/components/FormTestConnection'
 import { RunConfiguration } from '@/shared/components/DataConfiguration/components/RunConfiguration/RunConfiguration'
-import { useWatch } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { RunList } from '@/shared/components/DataConfiguration/components/RunList/RunList'
 import { useConfigurationRuns } from '@/shared/components/DataConfiguration/components/RunList/hooks/data'
 import { useState } from 'react'
@@ -18,22 +22,26 @@ import { DataServiceConfig } from '@/shared/schemas/data-service'
 import { PageHeader } from '@/shared/components/PageHeader'
 
 export const Route = createLazyFileRoute(
-    '/data-service-configuration/_provider/$configId/_provider/'
+    '/connections/_provider/$configId/_provider/'
 )({
     component: RouteComponent,
 })
 
 function RouteComponent() {
     const navigate = useNavigate({
-        from: '/data-service-configuration/$configId',
+        from: '/connections/$configId',
     })
 
-    const config = useWatch<DataServiceConfig>()
+    const { configId } = useParams({
+        from: '/connections/_provider/$configId/_provider/',
+    })
+
+    const config = useFormContext<DataServiceConfig>().watch()
     const source = config?.source
     const [activeTab, setActiveTab] = useState<'metadata' | 'data'>('metadata')
 
     const { loading, runs, fetching, pagination, error, refetch } =
-        useConfigurationRuns(activeTab)
+        useConfigurationRuns(activeTab, configId)
 
     return (
         <div className="h-full w-full flex flex-col gap-4 ">
@@ -41,7 +49,7 @@ function RouteComponent() {
                 <Button
                     onClick={() => {
                         navigate({
-                            to: '/data-service-configuration',
+                            to: '/connections',
                         })
                     }}
                     icon={<IconArrowLeft24 />}
@@ -60,9 +68,9 @@ function RouteComponent() {
                                     <Button
                                         onClick={() => {
                                             navigate({
-                                                to: '/data-service-configuration/$configId/edit',
+                                                to: '/connections/$configId/edit',
                                                 params: {
-                                                    configId: config.id,
+                                                    configId: config.id!,
                                                 },
                                             })
                                         }}
@@ -120,6 +128,7 @@ function RouteComponent() {
                             pagination={pagination}
                             error={error}
                             refetch={refetch}
+                            config={config as DataServiceConfig}
                         />
                     </>
                 </>

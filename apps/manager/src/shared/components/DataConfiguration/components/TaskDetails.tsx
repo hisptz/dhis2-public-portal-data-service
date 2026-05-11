@@ -22,6 +22,7 @@ function TaskDetailsModal({
     type,
     runType,
     runID,
+    configId,
     open,
     onClose,
 }: {
@@ -33,6 +34,7 @@ function TaskDetailsModal({
     type: 'download' | 'upload'
     runID: string
     runType: 'metadata' | 'data'
+    configId: string
     open: boolean
     onClose: () => void
 }) {
@@ -52,6 +54,7 @@ function TaskDetailsModal({
                         task={task as MetadataUploadJob | DataUploadJob}
                         runType={runType}
                         runID={runID}
+                        configId={configId}
                     />
                 )}
             </ModalContent>
@@ -67,6 +70,7 @@ export function TaskDetails({
     runID,
     runType,
     type,
+    configId,
 }: {
     task:
         | MetadataDownloadJob
@@ -76,6 +80,7 @@ export function TaskDetails({
     runType: 'metadata' | 'data'
     runID: string
     type: 'download' | 'upload'
+    configId: string
 }) {
     const { value: open, toggle } = useBoolean(false)
 
@@ -88,6 +93,7 @@ export function TaskDetails({
                     type={type}
                     runID={runID}
                     runType={runType}
+                    configId={configId}
                     open={open}
                     onClose={toggle}
                 />

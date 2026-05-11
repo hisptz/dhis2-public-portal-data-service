@@ -8,7 +8,6 @@ import i18n from '@dhis2/d2-i18n'
 import { PeriodUtility } from '@hisptz/dhis2-utils'
 import { RunConfigSummary } from '@/shared/components/DataConfiguration/components/RunConfiguration/components/RunConfigSummary/RunConfigSummary'
 import { DataServiceConfig } from '@/shared/schemas/data-service'
-import { useWatch } from 'react-hook-form'
 import { RunStatus } from '../RunStatus'
 import { useMemo } from 'react'
 import { capitalize } from 'lodash'
@@ -93,6 +92,7 @@ export function RunList({
     activeTab,
     pagination,
     error,
+    config,
 }: {
     loading: boolean
     runs: (MetadataRun | DataRun)[]
@@ -108,9 +108,8 @@ export function RunList({
     }
     error: FetchError | null
     refetch: () => void
+    config?: DataServiceConfig
 }) {
-    const config = useWatch<DataServiceConfig>()
-
     const transformRun = (
         run: MetadataRun | DataRun,
         configurationsValue: string
@@ -144,12 +143,20 @@ export function RunList({
         dashboards: (run as MetadataRun).dashboards?.length ?? 0,
         status: (
             <>
-                <RunStatus runId={run.uid} type={activeTab} />
+                <RunStatus
+                    runId={run.uid}
+                    type={activeTab}
+                    configId={config?.id ?? ''}
+                />
             </>
         ),
         actions: (
             <>
-                <RunConfigSummary runId={run.uid} type={activeTab} />
+                <RunConfigSummary
+                    runId={run.uid}
+                    type={activeTab}
+                    configId={config?.id ?? ''}
+                />
             </>
         ),
     })

@@ -4,11 +4,9 @@ import { useQuery } from '@tanstack/react-query'
 import { useCallback, useEffect, useState } from 'react'
 import {
     DataErrorObject,
-    DataServiceConfig,
     ImportSummary,
     MetadataErrorObject,
 } from '@/shared/schemas/data-service'
-import { useWatch } from 'react-hook-form'
 
 enum MetadataSourceType {
     SOURCE_INSTANCE,
@@ -127,11 +125,13 @@ const query = {
 
 type RunType = 'metadata' | 'data'
 
-export function useConfigurationRuns<T extends RunType>(type: T) {
-    const config = useWatch<DataServiceConfig>()
+export function useConfigurationRuns<T extends RunType>(
+    type: T,
+    configId: string
+) {
     const engine = useDataEngine()
 
-    const enabled = Boolean(config?.id)
+    const enabled = Boolean(configId)
 
     const [paginationState, setPaginationState] = useState<
         Record<RunType, { page: number; pageSize: number }>
@@ -160,12 +160,12 @@ export function useConfigurationRuns<T extends RunType>(type: T) {
     const pageSize = paginationState[type].pageSize
 
     const queryResult = useQuery({
-        queryKey: [config?.id, type, page, pageSize],
+        queryKey: [configId, type, page, pageSize],
         enabled,
         queryFn: async (): Promise<QueryResponse<RunTypeMap[T]>> => {
             const res = await engine.query(query, {
                 variables: {
-                    id: config.id,
+                    id: configId,
                     type,
                     page,
                     pageSize,

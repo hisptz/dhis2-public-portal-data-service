@@ -14,16 +14,19 @@ export function UploadTaskDetails({
     task,
     runType,
     runID,
+    configId,
 }: {
     task: MetadataUploadJob | DataUploadJob
     runID: string
     runType: 'metadata' | 'data'
+    configId: string
 }) {
     const [showError, setShowError] = useState(false)
     const { download, loading } = useFailedTaskDownload({
         taskId: task.uid,
         type: runType,
         runId: runID,
+        configId,
     })
 
     const startedAtFmt = useMemo(

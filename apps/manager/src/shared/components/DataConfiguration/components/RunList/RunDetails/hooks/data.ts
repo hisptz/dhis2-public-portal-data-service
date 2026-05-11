@@ -5,8 +5,6 @@ import {
     MetadataUploadJob,
     Run,
 } from '@/shared/components/DataConfiguration/components/RunList/hooks/data'
-import { DataServiceConfig } from '@/shared/schemas/data-service'
-import { useWatch } from 'react-hook-form'
 import { useState } from 'react'
 
 const query = {
@@ -61,11 +59,12 @@ type RunDetailsMap = Run & {
 export function useRunDetails<T extends 'metadata' | 'data'>({
     runId,
     type,
+    configId,
 }: {
     runId: string
     type: T
+    configId: string
 }) {
-    const config = useWatch<DataServiceConfig>()
     const engine = useDataEngine()
 
     const [downloadsPage, setDownloadsPage] = useState(1)
@@ -74,12 +73,12 @@ export function useRunDetails<T extends 'metadata' | 'data'>({
     const [uploadsPage, setUploadsPage] = useState(1)
     const [uploadsPageSize, setUploadsPageSize] = useState(5)
 
-    const enabled = Boolean(config?.id && runId)
+    const enabled = Boolean(configId && runId)
 
     const fetchRunDetails = async (): Promise<RunDetailsMap> => {
         const data = await engine.query(query, {
             variables: {
-                configId: config.id,
+                configId,
                 runId,
                 type,
                 downloadsPage,
@@ -94,7 +93,7 @@ export function useRunDetails<T extends 'metadata' | 'data'>({
 
     const queryResult = useQuery<RunDetailsMap, FetchError>({
         queryKey: [
-            config?.id,
+            configId,
             'runs',
             type,
             runId,

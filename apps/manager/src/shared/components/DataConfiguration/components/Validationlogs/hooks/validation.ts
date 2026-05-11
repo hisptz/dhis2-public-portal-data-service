@@ -120,7 +120,7 @@ export function useValidationLogs(
         queryFn: async (): Promise<ValidationLogsResponse> => {
             const session = validationSessions.get(configId)
             if (!session) {
-                navigate({ to: '/data-service-configuration' })
+                navigate({ to: '/connections' })
                 throw new Error(
                     'Validation session not found - redirecting to configuration page'
                 )
@@ -181,7 +181,7 @@ export function useValidationDiscrepancies(
         queryFn: async (): Promise<ValidationDiscrepanciesResponse> => {
             const session = validationSessions.get(configId)
             if (!session) {
-                navigate({ to: '/data-service-configuration' })
+                navigate({ to: '/connections' })
                 throw new Error(
                     'Validation session not found - redirecting to configuration page'
                 )
@@ -261,7 +261,7 @@ export function useValidationStatus(configId: string) {
         queryFn: async (): Promise<ValidationSummary> => {
             const session = validationSessions.get(configId)
             if (!session) {
-                navigate({ to: '/data-service-configuration' })
+                navigate({ to: '/connections' })
                 throw new Error(
                     'Validation session not found - redirecting to configuration page'
                 )

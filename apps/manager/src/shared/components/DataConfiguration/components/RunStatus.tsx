@@ -2,9 +2,7 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import { useQuery } from '@tanstack/react-query'
 import { CircularLoader, Tag } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
-import { useWatch } from 'react-hook-form'
 import { StickMan } from './StickMan'
-import { DataServiceConfig } from '@/shared/schemas/data-service'
 
 export type RunStatus =
     | 'IGNORED'
@@ -39,22 +37,23 @@ const configStatusQuery = {
 export function RunStatus({
     runId,
     type,
+    configId,
 }: {
     runId: string
     type: 'metadata' | 'data'
+    configId: string
 }) {
-    const config = useWatch<DataServiceConfig>()
     const engine = useDataEngine()
 
-    const enabled = Boolean(config?.id && runId)
+    const enabled = Boolean(configId && runId)
 
     const { data, isLoading, error } = useQuery({
-        queryKey: [config?.id, 'runs', type, runId, 'status'],
+        queryKey: [configId, 'runs', type, runId, 'status'],
         enabled,
         queryFn: async () => {
             const data = await engine.query(query, {
                 variables: {
-                    configId: config.id,
+                    configId,
                     runId,
                     type,
                 },

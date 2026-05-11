@@ -6,9 +6,11 @@ import i18n from '@dhis2/d2-i18n'
 export function RunConfigSummary({
     runId,
     type,
+    configId,
 }: {
     runId: string
     type: 'metadata' | 'data'
+    configId: string
 }) {
     const { value: hide, setTrue: onHide, setFalse: onShow } = useBoolean(true)
 
@@ -20,6 +22,7 @@ export function RunConfigSummary({
                     onClose={onHide}
                     runId={runId}
                     type={type}
+                    configId={configId}
                 />
             )}
             <Tooltip content={i18n.t('View last run summary')}>

@@ -11,7 +11,7 @@ export function AddDataSource() {
         <>
             {!hide && <AddDataSourceForm onClose={onHide} hide={hide} />}
             <Button primary icon={<IconAdd24 />} onClick={onShow}>
-                {i18n.t('Add data configuration')}
+                {i18n.t('New connection')}
             </Button>
         </>
     )

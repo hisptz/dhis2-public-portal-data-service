@@ -1,39 +1,23 @@
-import {
-    createLazyFileRoute,
-    useNavigate,
-    useParams,
-} from '@tanstack/react-router'
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
 import { SourceConfiguration } from '@/shared/components/DataConfiguration/components/SourceConfiguration'
 import { DataItemsConfig } from '@/shared/components/DataConfiguration/components/DataItemsConfig/DataItemsConfig'
 import { Button, IconArrowLeft24 } from '@dhis2/ui'
 import i18n from '@dhis2/d2-i18n'
 
 export const Route = createLazyFileRoute(
-    '/data-service-configuration/_provider/$configId/_provider/edit/_provider/'
+    '/connections/_provider/$configId/_provider/edit/_provider/'
 )({
     component: RouteComponent,
 })
 
 function RouteComponent() {
-    const navigate = useNavigate({
-        from: '/data-service-configuration/$configId/edit/',
-    })
-    const { configId } = useParams({
-        from: '/data-service-configuration/_provider/$configId/_provider/edit/_provider/',
-    })
+    const navigate = useNavigate()
 
     return (
-        <div className="h-full w-full flex flex-col gap-4 ">
+        <div className="h-full w-full flex flex-col gap-4">
             <div className="pb-2">
                 <Button
-                    onClick={() => {
-                        navigate({
-                            to: '/data-service-configuration/$configId',
-                            params: {
-                                configId,
-                            },
-                        })
-                    }}
+                    onClick={() => navigate({ to: '/connections' })}
                     icon={<IconArrowLeft24 />}
                 >
                     {i18n.t('Back')}

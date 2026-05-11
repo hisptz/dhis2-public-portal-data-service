@@ -3,7 +3,7 @@ import { ModuleContainer } from '@/shared/components/ModuleContainer'
 import { ValidationLogsPage } from '@/shared/components/DataConfiguration/components/Validationlogs/ValidationLogsPage'
 
 export const Route = createLazyFileRoute(
-    '/data-service-configuration/_provider/$configId/validation-logs/'
+    '/data-validations/_provider/$configId/validation-logs/'
 )({
     component: RouteComponent,
 })

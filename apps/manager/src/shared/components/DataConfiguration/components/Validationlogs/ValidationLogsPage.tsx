@@ -30,9 +30,7 @@ interface ValidationLogsPageProps {
 export function ValidationLogsPage({ configId }: ValidationLogsPageProps) {
     const [activeTab, setActiveTab] = useState('logs')
 
-    const navigate = useNavigate({
-        from: '/data-service-configuration/$configId/validation-logs',
-    })
+    const navigate = useNavigate()
 
     const { show } = useAlert(
         ({ message }) => message,
@@ -84,12 +82,7 @@ export function ValidationLogsPage({ configId }: ValidationLogsPageProps) {
     }
 
     const handleGoBack = () => {
-        navigate({
-            to: '/data-service-configuration/$configId',
-            params: {
-                configId,
-            },
-        })
+        navigate({ to: '/data-validations' })
     }
 
     const isValidationRunning =
