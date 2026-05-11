@@ -21,7 +21,7 @@ import {
 
 import i18n from '@dhis2/d2-i18n'
 import { PeriodSelector } from './components/PeriodSelector'
-import { useAlert, useConfig, useDataEngine } from '@dhis2/app-runtime'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import { ConfigSelector } from './components/ConfigSelector'
 import { useQueryClient } from '@tanstack/react-query'
 import { RHFSingleSelectField } from '@hisptz/dhis2-ui'
@@ -54,7 +54,6 @@ export function RunConfigForm({
 }) {
     const queryClient = useQueryClient()
     const engine = useDataEngine()
-    const { serverVersion } = useConfig()
     const navigate = useNavigate()
     const startValidation = useStartValidation(config.id, config)
     const { show, hide: hideAlert } = useAlert(
@@ -89,40 +88,41 @@ export function RunConfigForm({
     const onSubmit = async (data: RunConfigFormValues) => {
         try {
             hideAlert()
-            let result
+            let resultMessage: string | undefined
+
             if (data.service === 'metadata-migration') {
                 if (data.metadataSource === 'source') {
-                    result = await downloadMetadata({
+                    const res = await downloadMetadata({
                         engine,
                         configId: config.id,
                         data,
                     })
+                    resultMessage = res.message
                 }
-
-                if (data.metadataSource === 'flexiportal-config') {
-                    //TODO: handle this
-                }
+                // TODO: handle flexiportal-config metadata source
             } else if (data.service === 'data-deletion') {
-                const deletionRequest = {
-                    dataItemsConfigIds: data.dataItemsConfigIds,
-                    runtimeConfig: data.runtimeConfig,
-                    isDelete: true,
+                const dataForDeletion = data as typeof data & {
+                    dataItemsConfigIds: string[]
+                    runtimeConfig: Record<string, unknown>
                 }
-
-                result = await downloadData(
-                    engine,
-                    config.id,
-                    deletionRequest,
-                    serverVersion
+                await downloadData(engine, config.id, {
+                    dataItemsConfigIds: dataForDeletion.dataItemsConfigIds,
+                    runtimeConfig: dataForDeletion.runtimeConfig,
+                    isDelete: true,
+                })
+                resultMessage = i18n.t(
+                    'Data deletion process started successfully. Check the queue for progress.'
                 )
             } else if (data.service === 'data-validation') {
-                const validationRequest = {
-                    dataItemsConfigIds: data.dataItemsConfigIds,
-                    runtimeConfig: data.runtimeConfig,
+                const dataForValidation = data as typeof data & {
+                    dataItemsConfigIds: string[]
+                    runtimeConfig: { periods?: string[] } & Record<
+                        string,
+                        unknown
+                    >
                 }
-
-                // Get selected periods from form
-                const selectedPeriods = data.runtimeConfig.periods || []
+                const selectedPeriods =
+                    dataForValidation.runtimeConfig.periods ?? []
                 if (selectedPeriods.length === 0) {
                     show({
                         message: i18n.t(
@@ -133,91 +133,67 @@ export function RunConfigForm({
                     return
                 }
 
-                // Get selected config items details
-                const selectedConfigs = config.itemsConfig.filter((item) =>
-                    data.dataItemsConfigIds.includes(item.id)
-                )
+                const validationRequest = {
+                    dataItemsConfigIds: dataForValidation.dataItemsConfigIds,
+                    runtimeConfig: dataForValidation.runtimeConfig,
+                }
 
-                // Extract all data elements and org units from selected configs
+                const selectedConfigs = (config.itemsConfig ?? []).filter(
+                    (item) =>
+                        dataForValidation.dataItemsConfigIds.includes(item.id)
+                )
                 const allDataElements = selectedConfigs.flatMap(
                     (configItem) => [
-                        ...configItem.dataElements,
-                        ...(configItem.dataItems?.map(
-                            (dataItem) => dataItem.id
-                        ) ?? []),
+                        ...(configItem.dataElements ?? []),
+                        ...(configItem.dataItems?.map((di) => di.id) ?? []),
                     ]
                 )
                 const allOrgUnits = selectedConfigs.map(
                     (configItem) => configItem.parentOrgUnitId
                 )
-
-                // Store comprehensive validation parameters for re-run functionality
-                const fullValidationData = {
-                    ...validationRequest,
-                    periods: selectedPeriods,
-                    dataElements: allDataElements,
-                    orgUnits: allOrgUnits,
-                    configDetails: selectedConfigs.map((item) => ({
-                        id: item.id,
-                        name: item.name,
-                        type: item.type,
-                        periodTypeId: item.periodTypeId,
-                        dataItemsCount:
-                            item.dataElements.length +
-                            (item.dataItems?.length ?? 0),
-                        parentOrgUnitId: item.parentOrgUnitId,
-                        orgUnitLevel: item.orgUnitLevel,
-                    })),
-                }
                 localStorage.setItem(
                     `validation-params-${config.id}`,
-                    JSON.stringify(fullValidationData)
+                    JSON.stringify({
+                        ...validationRequest,
+                        periods: selectedPeriods,
+                        dataElements: allDataElements,
+                        orgUnits: allOrgUnits,
+                    })
                 )
-                result = await startValidation.mutateAsync(validationRequest)
+                await startValidation.mutateAsync(validationRequest)
+                resultMessage = i18n.t(
+                    'Data validation process started successfully. Redirecting to validation logs...'
+                )
             } else {
-                const dataRequest = {
-                    dataItemsConfigIds: data.dataItemsConfigIds,
-                    runtimeConfig: data.runtimeConfig,
+                // data-migration
+                const dataForMigration = data as typeof data & {
+                    dataItemsConfigIds: string[]
+                    runtimeConfig: Record<string, unknown>
                 }
-
-                result = await downloadData(
-                    engine,
-                    config.id,
-                    dataRequest,
-                    serverVersion
-                )
+                await downloadData(engine, config.id, {
+                    dataItemsConfigIds: dataForMigration.dataItemsConfigIds,
+                    runtimeConfig: dataForMigration.runtimeConfig,
+                })
             }
 
             queryClient.invalidateQueries({
                 queryKey: ['data-service-logs', config.id],
             })
-
             queryClient.invalidateQueries({
                 queryKey: ['config-status', config.id],
             })
 
-            let successMessage =
-                result.message || i18n.t('Service started successfully')
-            if (data.service === 'data-deletion') {
-                successMessage = i18n.t(
-                    'Data deletion process started successfully. Check the queue for progress.'
-                )
-            } else if (data.service === 'data-validation') {
-                successMessage = i18n.t(
-                    'Data validation process started successfully. Redirecting to validation logs...'
-                )
-            }
             onRunComplete()
             show({
-                message: successMessage,
+                message:
+                    resultMessage ?? i18n.t('Service started successfully'),
                 type: { success: true },
             })
 
-            // Navigate to validation logs page if this is a validation service
             if (data.service === 'data-validation') {
                 onClose()
                 navigate({
-                    to: `/data-validations/$configId/validation-logs`,
+                    to: '/data-validations/$configId/validation-logs',
                     params: { configId: config.id },
                 })
             } else {
@@ -225,14 +201,10 @@ export function RunConfigForm({
             }
         } catch (error) {
             console.error(error)
-            let errorMessage = i18n.t('Failed to start service')
-            if (error instanceof Error) {
-                errorMessage = `${errorMessage}: ${error.message}`
-            } else {
-                errorMessage = `${errorMessage}: ${String(error)}`
-            }
+            const errorMessage =
+                error instanceof Error ? error.message : String(error)
             show({
-                message: errorMessage,
+                message: `${i18n.t('Failed to start service')}: ${errorMessage}`,
                 type: { critical: true },
             })
         }
